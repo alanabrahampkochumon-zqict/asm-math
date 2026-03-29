@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.25)
-project(ASM_Math LANGUAGES CXX ASM_MASM)
+project(ASMMath LANGUAGES CXX ASM_MASM)
 
+add_library(ProjectStrictWarnings INTERFACE)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Clang Formatter
 find_program(CLANG_FORMATTER NAMES clang-format)
@@ -42,11 +45,14 @@ if(ENABLE_STRICT)
     message(STATUS "Turning on Address Sanitizer")
     if(MSVC)
         add_compile_options($<$<COMPILE_LANGUAGE:CXX>:/fsanitize=address>)
+        target_compile_options(ProjectStrictWarnings INTERFACE $<$<COMPILE_LANGUAGE:CXX>:/WX /W4 /permissive- /fp:strict>)
     else()
         add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-fsanitize=address>)
         add_link_options(-fsanitize=address)
+        target_compile_options(ProjectStrictWarnings INTERFACE $<$<COMPILE_LANGUAGE:CXX>:-fno-omit-frame-pointer -Wall -Wextra -Werror -pedantic-errors>)
     endif()
 endif()
+
 
 include(dependencies.cmake)
 
@@ -54,6 +60,11 @@ add_subdirectory(asm-math)
 add_subdirectory(benchmark-suite)
 add_subdirectory(playground)
 add_subdirectory(test-suite)
+
+target_link_libraries(ASMMathLib PRIVATE ProjectStrictWarnings)
+target_link_libraries(TestSuite PRIVATE ProjectStrictWarnings)
+target_link_libraries(BenchmarkSuite PRIVATE ProjectStrictWarnings)
+target_link_libraries(Playground PRIVATE ProjectStrictWarnings)
 
 set_target_properties(format docs PROPERTIES FOLDER "Dev Tools")
 

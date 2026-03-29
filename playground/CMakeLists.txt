@@ -10,5 +10,8 @@ target_sources(
     ${SrcFiles}
 )
 
-target_link_libraries(Math)
+target_link_libraries(
+    Playground PRIVATE 
+    ASMMathLib
+)
 

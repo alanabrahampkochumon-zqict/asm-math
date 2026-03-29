@@ -1,10 +1,10 @@
-add_library(Math STATIC)
+add_library(ASMMathLib STATIC)
 
 set(IncludeDirectory include/)
 
-set(HeaderFiles "Math.h")
+set(HeaderFiles "Scalars.h")
 list(TRANSFORM HeaderFiles PREPEND ${IncludeDirectory})
-set(TemplateDefinitionFiles "Math.h")
+set(TemplateDefinitionFiles "Scalars.tpp")
 list(TRANSFORM TemplateDefinitionFiles PREPEND ${IncludeDirectory})
 
 set (ScalarASMFolder src/scalars/)
@@ -12,7 +12,7 @@ set(ScalarASMFiles "add.asm;")
 list(TRANSFORM ScalarASMFiles PREPEND ${ScalarASMFolder})
 
 target_sources(
-    Math 
+    ASMMathLib 
 
     PUBLIC
     FILE_SET HEADERS
@@ -24,7 +24,7 @@ target_sources(
 )
 
 target_include_directories(
-    Math PUBLIC
+    ASMMathLib PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
 )
@@ -34,9 +34,3 @@ source_group(
     PREFIX "Source Files"
     FILES ${ScalarASMFiles}
 )
-
-# add_custom_target(
-#     MathInterface 
-#     ALL 
-#     SOURCES ${HeaderFiles}
-# )

@@ -19,13 +19,6 @@ target_sources(
     FILES ${IncludeFiles}
 )
 
-if (ENABLE_STRICT)
-    if(MSVC)
-        target_compile_options(TestSuite PRIVATE $<$<COMPILE_LANGUAGE:CXX>:/WX /W4 /permissive- /fp:strict>)
-    else()
-        target_compile_options(TestSuite PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-fno-omit-frame-pointer -Wall -Wextra -Werror -pedantic-errors>)
-    endif()
-endif()
 
 target_include_directories(
     TestSuite PRIVATE
@@ -35,7 +28,7 @@ target_include_directories(
 target_link_libraries(
     TestSuite PRIVATE
     GTest::gtest_main
-    Math
+    ASMMathLib
 )
 
 enable_testing()
