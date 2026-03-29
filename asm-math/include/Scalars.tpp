@@ -1,4 +1,5 @@
 #pragma once
+#include "Scalars.h"
 /**
  * @file Scalars.tpp
  * @author Alan Abraham P Kochumon
@@ -13,12 +14,19 @@
 namespace asmmath
 {
 	template <typename T>
-	constexpr Scalar<T>::Scalar(const T value) noexcept : _value(value)
-	{
-	}
+	constexpr Scalar<T>::Scalar(const T value) noexcept : _value(value) {}
 
 
 	template <typename T>
 	constexpr Scalar<T>::operator T() const noexcept { return _value; }
+
+
+	template <typename T>
+	constexpr Scalar<T> Scalar<T>::operator+(Scalar rhs) const noexcept
+	{
+		rhs;
+		static T zero = T(0);
+		return zero;
+	}
 }
 

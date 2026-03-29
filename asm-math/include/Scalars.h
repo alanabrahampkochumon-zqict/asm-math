@@ -26,11 +26,18 @@ namespace asmmath
 
 
 		/**
+		 * @brief Explicitly generated default constructor.
+		 */
+		constexpr Scalar() noexcept = default;
+
+
+		/**
 		 * @brief Instantiate a @ref Scalar with a passed-in parameter.
 		 * 
 		 * @param value The value to initialize the scalar with.
 		 */
 		constexpr Scalar(T value) noexcept;
+
 
 		/**
 		 * @brief Treat a @ref Scalar instance as the fundamental `value_type` primitive.
@@ -39,10 +46,19 @@ namespace asmmath
 		 */
 		constexpr operator T() const noexcept;
 
+
+		/**
+		 * @brief Perform addition of two scalars.
+		 * 
+		 * @param rhs The scalar to add.
+		 * 
+		 * @return The sum of two scalars.
+		 */
+		constexpr Scalar operator+(Scalar rhs) const noexcept;
+
 	private:
 		T _value; ///< Internal data store of the _value.
 	};
-
 }
 
 

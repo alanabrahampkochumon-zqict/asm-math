@@ -35,9 +35,9 @@ _asm_scalar_add PROC
 
 _asm_scalar_add ENDP
 
-GENERATE_ADD_PROC_INT _asm_scalar_add_8, CL, DL, AL                                                       ;
-GENERATE_ADD_PROC_INT _asm_scalar_add_16, CX, DX, AX                                                      ;
-GENERATE_ADD_PROC_INT _asm_scalar_add_32, ECX, EDX, EAX                                                   ;
-GENERATE_ADD_PROC_INT _asm_scalar_add_64, RCX, RDX, RAX                                                   ;
+GENERATE_ADD_PROC_INT _asm_scalar_add_8, CL, DL, AL                                                       ; Macro invocation for 8-bit integrals.
+GENERATE_ADD_PROC_INT _asm_scalar_add_16, CX, DX, AX                                                      ; Macro invocation for 16-bit integrals.
+GENERATE_ADD_PROC_INT _asm_scalar_add_32, ECX, EDX, EAX                                                   ; Macro invocation for 32-bit integrals.
+GENERATE_ADD_PROC_INT _asm_scalar_add_64, RCX, RDX, RAX                                                   ; Macro invocation for 64-bit integrals.
 
 END
