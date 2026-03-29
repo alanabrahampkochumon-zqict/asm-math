@@ -1,15 +1,19 @@
-; Sample code snippet
+; Arithmetic operations for scalars.
 
 .data
 
 .code
 
-PUBLIC asm_add_integers ; Expose the functions so that C++ can use them
+PUBLIC _asm_scalar_add                        ; Expose the functions so that C++ can use them
 
+XOR RCX, RCX                                  ; Clear out RCX
+XOR RDX, RDX                                  ; Clear out RDX
 
-asm_add_integers PROC
+_asm_scalar_add PROC
+	ADD RCX, RDX                              ; Adding RCX and RDX and store the result in RCX
+	MOV RAX, RCX                              ; Move result into RAX before returning
+	RET
 
-asm_add_integers ENDP
-
+_asm_scalar_add ENDP
 
 END
