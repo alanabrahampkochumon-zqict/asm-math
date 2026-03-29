@@ -1,6 +1,5 @@
 add_executable(TestSuite)
 
-
 set(TestDir "src/")
 set(TestFiles "SampleTest.cpp")
 list(TRANSFORM TestFiles PREPEND ${TestDir})
@@ -19,6 +18,14 @@ target_sources(
     BASE_DIRS ${IncludeDir}
     FILES ${IncludeFiles}
 )
+
+if (ENABLE_STRICT)
+    if(MSVC)
+        target_compile_options(TestSuite PRIVATE $<$<COMPILE_LANGUAGE:CXX>:/WX /W4 /permissive- /fp:strict>)
+    else()
+        target_compile_options(TestSuite PRIVATE $<$<COMPILE_LANGUAGE:CXX>:-fno-omit-frame-pointer -Wall -Wextra -Werror -pedantic-errors>)
+    endif()
+endif()
 
 target_include_directories(
     TestSuite PRIVATE

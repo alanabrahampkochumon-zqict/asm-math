@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.25)
-project(ASM_Math)
+project(ASM_Math LANGUAGES CXX ASM_MASM)
 
 
 # Clang Formatter
@@ -34,7 +34,6 @@ else()
     message(WARN "Doxygen not found! Skipping documentation generation.")
 endif()
 
-
 # Turn on solution folders
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -42,9 +41,9 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 if(ENABLE_STRICT)
     message(STATUS "Turning on Address Sanitizer")
     if(MSVC)
-        add_compile_options(/fsanitize=address /WX /W4 /Wall /permissive- /fp:strict)
+        add_compile_options($<$<COMPILE_LANGUAGE:CXX>:/fsanitize=address>)
     else()
-        add_compile_options(-fsanitize=address -fno-omit-frame-pointer -Wall -Wextra -Werror -pedantic-errors)
+        add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-fsanitize=address>)
         add_link_options(-fsanitize=address)
     endif()
 endif()
