@@ -19,6 +19,6 @@ namespace asmmath
 
 
 	template <typename T>
-	Scalar<T>::operator T() const noexcept { return _value; }
+	constexpr Scalar<T>::operator T() const noexcept { return _value; }
 }
 

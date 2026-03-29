@@ -34,7 +34,7 @@ namespace asmmath
 		 *		  
 		 * @return The current value held by the current instance. 
 		 */
-		operator T() const noexcept;
+		constexpr operator T() const noexcept;
 
 	private:
 		T _value; ///< Internal data store of the _value.

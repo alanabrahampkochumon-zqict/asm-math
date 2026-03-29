@@ -44,7 +44,22 @@ TYPED_TEST(ScalarCoreTests, InitializesToCorrectValue)
 		EXPECT_EQ(initialValue, actual);
 }
 
-//TYPED_TEST(ScalarCoreTests, ImplicitConversionToPrimitives)
+
+/** @test Verify that scalar can be used as their primitive value_type. */
+TYPED_TEST(ScalarCoreTests, ImplicitConversionToPrimitives)
+{
+	constexpr TypeParam initialValue = 123;
+	constexpr asmmath::Scalar<TypeParam> s(initialValue);
+
+	constexpr TypeParam primitive = s;
+
+	if constexpr (std::is_same_v<TypeParam, double>)
+		EXPECT_DOUBLE_EQ(initialValue, primitive);
+	else if constexpr (std::is_floating_point_v<TypeParam>)
+		EXPECT_FLOAT_EQ(initialValue, primitive);
+	else
+		EXPECT_EQ(initialValue, primitive);
+}
 
 /**
  * @test Verify that add two numbers using @ref asmmath::add returns their sum.
