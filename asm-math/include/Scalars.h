@@ -50,7 +50,7 @@ namespace asmmath
 		constexpr Scalar operator+(Scalar rhs) const noexcept;
 
 	private:
-		T _value; ///< Internal data store of the _value.
+		T _value; ///< Internal data store of the value.
 	};
 }
 
