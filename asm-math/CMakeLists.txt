@@ -12,7 +12,7 @@ target_sources(
     INTERFACE
     
     FILE_SET HEADERS
-    INCLUDE_DIRS ${IncludeDirectory}
+    BASE_DIRS ${IncludeDirectory}
     FILES ${HeaderFiles} ${TemplateDefinitionFiles}
 )
 
@@ -20,4 +20,10 @@ target_link_directories(
     Math INTERFACE
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
+)
+
+add_custom_target(
+    MathInterface 
+    ALL 
+    SOURCES ${HeaderFiles}
 )

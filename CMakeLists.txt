@@ -51,8 +51,10 @@ endif()
 
 include(dependencies.cmake)
 
-add_subdirectory(test-suite)
+add_subdirectory(asm-math)
 add_subdirectory(benchmark-suite)
+add_subdirectory(playground)
+add_subdirectory(test-suite)
 
 set_target_properties(format docs PROPERTIES FOLDER "Dev Tools")
 
