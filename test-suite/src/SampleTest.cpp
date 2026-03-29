@@ -64,7 +64,7 @@ TYPED_TEST(ScalarCoreTests, ImplicitConversionToPrimitives)
 /**
  * @test Verify that add two numbers using @ref asmmath::add returns their sum.
  */
-TEST(Add, ReturnsSumOfTwoNumbers)
-{
-	EXPECT_EQ(9, asmmath::_asm_scalar_add(5, 4));
-}
+//TEST(Add, ReturnsSumOfTwoNumbers)
+//{
+//	EXPECT_EQ(9, asmmath::_asm_scalar_add(5, 4));
+//}

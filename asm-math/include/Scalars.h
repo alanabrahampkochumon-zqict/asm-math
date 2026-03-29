@@ -12,7 +12,10 @@
 namespace asmmath
 {
 	extern "C" {
-		int _asm_scalar_add(int a, int b);
+		int _asm_scalar_add_8(int a, int b);
+		int _asm_scalar_add_16(int a, int b);
+		int _asm_scalar_add_32(int a, int b);
+		int _asm_scalar_add_64(int a, int b);
 	}
 
 
