@@ -28,6 +28,7 @@ target_include_directories(
 target_link_libraries(
     TestSuite PRIVATE
     GTest::gtest_main
+    Math
 )
 
 enable_testing()
