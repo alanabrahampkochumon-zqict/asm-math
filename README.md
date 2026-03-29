@@ -1,6 +1,6 @@
-# Modern C++ Project Template
+# ASM Math
 
-A high-performance boilerplate for C++ development featuring CMake integration, Google Test (GTest) for unit testing, and Google Benchmark for performance analysis.
+A simple math interface written in x64 assembly, that works with CPP. See `playground` to see demo of the interface in action.
 
 # Prerequisites
 
