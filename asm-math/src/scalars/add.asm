@@ -16,6 +16,7 @@ GENERATE_ADD_PROC_FLOAT MACRO func_name, add_instr
     public func_name
     func_name PROC
         add_instr XMM0, XMM1
+        RET
     func_name ENDP
 ENDM
 
@@ -36,5 +37,6 @@ GENERATE_ADD_PROC_INT _asm_scalar_add_32, ECX, EDX, EAX                         
 GENERATE_ADD_PROC_INT _asm_scalar_add_64, RCX, RDX, RAX                                             ; Macro invocation for 64-bit integrals.
 
 GENERATE_ADD_PROC_FLOAT _asm_scalar_add_f32, ADDSS                                                  ; Macro invocation for 32-bit floating point type.
+GENERATE_ADD_PROC_FLOAT _asm_scalar_add_f64, ADDSD                                                  ; Macro invocation for 64-bit floating point type.
 
 END

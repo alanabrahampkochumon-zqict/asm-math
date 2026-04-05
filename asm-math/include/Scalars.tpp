@@ -20,6 +20,7 @@ namespace asmmath
 		int32_t _asm_scalar_add_32(int32_t a, int32_t b);
 		int64_t _asm_scalar_add_64(int64_t a, int64_t b);
 		float _asm_scalar_add_f32(float a, float b);
+		float _asm_scalar_add_f64(float a, float b);
 	}
 
 	template <typename T>
@@ -33,7 +34,9 @@ namespace asmmath
 	template <typename T>
 	constexpr Scalar<T> Scalar<T>::operator+(Scalar rhs) const noexcept
 	{
-		if constexpr (std::is_floating_point_v<T>)
+		if constexpr (std::is_same_v<T, double>)
+			return _asm_scalar_add_f64(*this, rhs);
+		else if constexpr (std::is_floating_point_v<T>)
 			return _asm_scalar_add_f32(*this, rhs);
 		else if constexpr (sizeof(T) == 1)
 			return static_cast<T>(_asm_scalar_add_8(static_cast<int8_t>(*this), static_cast<int8_t>(rhs)));
@@ -43,7 +46,7 @@ namespace asmmath
 			return static_cast<T>(_asm_scalar_add_32(static_cast<int32_t>(*this), static_cast<int32_t>(rhs)));
 		else if constexpr (sizeof(T) == 8)
 			return static_cast<T>(_asm_scalar_add_64(static_cast<int64_t>(*this), static_cast<int64_t>(rhs)));
-		else // Fallback, shouldn't hit this case during normal ops after implementing floating point counterparts.
+		else // Fallback, shouldn't hit this case during normal ops.
 			return *this + rhs;
 	}
 }
