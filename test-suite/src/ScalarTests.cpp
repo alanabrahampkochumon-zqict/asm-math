@@ -85,3 +85,14 @@ TYPED_TEST(ScalarAddition, ReturnsSumOfTwoNumbers)
 	else
 		EXPECT_EQ(this->_expectedSum, sum);
 }
+
+/**
+ * @test Verify that adding two scalars of different type return promoted type.
+ */
+TYPED_TEST(ScalarAddition, ReturnsPromotedType)
+{
+	const auto sum = this->_lhs + static_cast<double>(this->_rhs);
+
+	static_assert(std::is_same_v<decltype(sum), const double>);
+	EXPECT_DOUBLE_EQ(static_cast<double>(this->_expectedSum), sum);
+}
