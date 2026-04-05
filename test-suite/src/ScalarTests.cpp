@@ -108,7 +108,7 @@ TYPED_TEST(ScalarAddition, ReturnsSumOfTwoNumbers)
 }
 
 /**
- * @test Verify that adding two scalars of different type return promoted type.
+ * @test Verify that adding two scalars of different types return promoted type.
  */
 TYPED_TEST(ScalarAddition, ReturnsPromotedType)
 {
@@ -132,4 +132,16 @@ TYPED_TEST(ScalarSubtraction, ReturnsDifferenceOfTwoNumbers)
 		EXPECT_FLOAT_EQ(this->_expectedDifference, difference);
 	else
 		EXPECT_EQ(this->_expectedDifference, difference);
+}
+
+
+/**
+ * @test Verify that subtracting two scalars of different types return promoted type.
+ */
+TYPED_TEST(ScalarSubtraction, ReturnsPromotedType)
+{
+	const auto difference = this->_lhs - static_cast<double>(this->_rhs);
+
+	static_assert(std::is_same_v<decltype(difference), const double>);
+	EXPECT_DOUBLE_EQ(static_cast<double>(this->_expectedDifference), difference);
 }
