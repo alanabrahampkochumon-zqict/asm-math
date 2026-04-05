@@ -28,12 +28,12 @@ protected:
 
 	void SetUp() override
 	{
-		_lhs = 31;
-		_rhs = 16;
-		_expectedSum = 47;
+		_lhs = T(31);
+		_rhs = T(16);
+		_expectedSum = T(47);
 	}
 };
-TYPED_TEST_SUITE(ScalarAddition, SupportedIntegralTypes);
+TYPED_TEST_SUITE(ScalarAddition, SupportedTypes);
 
 
 

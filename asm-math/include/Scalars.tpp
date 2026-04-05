@@ -20,7 +20,7 @@ namespace asmmath
 		int32_t _asm_scalar_add_32(int32_t a, int32_t b);
 		int64_t _asm_scalar_add_64(int64_t a, int64_t b);
 		float _asm_scalar_add_f32(float a, float b);
-		float _asm_scalar_add_f64(float a, float b);
+		double _asm_scalar_add_f64(double a, double b);
 	}
 
 	template <typename T>
