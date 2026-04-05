@@ -43,11 +43,14 @@ namespace asmmath
 		/**
 		 * @brief Perform addition of two scalars.
 		 * 
+		 * @tparam U The numeric type of RHS operand.
+		 * 
 		 * @param rhs The scalar to add.
 		 * 
 		 * @return The sum of two scalars.
 		 */
-		constexpr Scalar operator+(Scalar rhs) const noexcept;
+		template <typename U>
+		constexpr auto operator+(Scalar<U> rhs) const noexcept -> std::common_type_t<T, U>;
 
 	private:
 		T _value; ///< Internal data store of the value.
