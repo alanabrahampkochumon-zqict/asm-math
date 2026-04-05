@@ -52,6 +52,19 @@ namespace asmmath
 		template <typename U>
 		constexpr auto operator+(Scalar<U> rhs) const noexcept -> std::common_type_t<T, U>;
 
+
+		/**
+		 * @brief Perform subtraction between two scalars.
+		 *
+		 * @tparam U The numeric type of RHS operand.
+		 *
+		 * @param rhs The scalar to subtract.
+		 *
+		 * @return The difference between two scalars.
+		 */
+		template <typename U>
+		constexpr auto operator-(Scalar<U> rhs) const noexcept -> std::common_type_t<T, U>;
+
 	private:
 		T _value; ///< Internal data store of the value.
 	};

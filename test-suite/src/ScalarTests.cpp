@@ -36,6 +36,27 @@ protected:
 TYPED_TEST_SUITE(ScalarAddition, SupportedTypes);
 
 
+/**
+ * @brief Test fixture for @ref asmmath::Scalar subtraction, parameterized by @ref SupportedTypes.
+ */
+template <typename T>
+class ScalarSubtraction : public ::testing::Test
+{
+protected:
+	asmmath::Scalar<T> _lhs;
+	asmmath::Scalar<T> _rhs;
+	asmmath::Scalar<T> _expectedDifference;
+
+	void SetUp() override
+	{
+		_lhs = T(31);
+		_rhs = T(16);
+		_expectedDifference = T(15);
+	}
+};
+TYPED_TEST_SUITE(ScalarSubtraction, SupportedTypes);
+
+
 
 /** @test Verify that scalars can be initialized with different numeric types. */
 TYPED_TEST(ScalarCoreTests, InitializesToCorrectValue)
@@ -95,4 +116,20 @@ TYPED_TEST(ScalarAddition, ReturnsPromotedType)
 
 	static_assert(std::is_same_v<decltype(sum), const double>);
 	EXPECT_DOUBLE_EQ(static_cast<double>(this->_expectedSum), sum);
+}
+
+
+/**
+ * @test Verify that subtracting two scalars return their difference.
+ */
+TYPED_TEST(ScalarSubtraction, ReturnsDifferenceOfTwoNumbers)
+{
+	const TypeParam difference = this->_lhs - this->_rhs;
+
+	if constexpr (std::is_same_v<TypeParam, double>)
+		EXPECT_DOUBLE_EQ(this->_expectedDifference, difference);
+	else if constexpr (std::is_floating_point_v<TypeParam>)
+		EXPECT_FLOAT_EQ(this->_expectedDifference, difference);
+	else
+		EXPECT_EQ(this->_expectedDifference, difference);
 }
