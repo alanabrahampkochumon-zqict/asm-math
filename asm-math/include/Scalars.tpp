@@ -64,8 +64,16 @@ namespace asmmath
 	constexpr auto Scalar<T>::operator-(Scalar<U> rhs) const noexcept -> std::common_type_t<T, U>
 	{
 		using R = std::common_type_t<T, U>;
-		rhs;
-		return R(0);
+		if constexpr (sizeof(R) == 1)
+			return static_cast<R>(_asm_scalar_sub_8(static_cast<int8_t>(*this), static_cast<int8_t>(rhs)));
+		else if constexpr (sizeof(R) == 2)
+			return static_cast<R>(_asm_scalar_sub_16(static_cast<int16_t>(*this), static_cast<int16_t>(rhs)));
+		else if constexpr (sizeof(R) == 4)
+			return static_cast<R>(_asm_scalar_sub_32(static_cast<int32_t>(*this), static_cast<int32_t>(rhs)));
+		else if constexpr (sizeof(R) == 8)
+			return static_cast<R>(_asm_scalar_sub_64(static_cast<int64_t>(*this), static_cast<int64_t>(rhs)));
+		else // Fallback, shouldn't hit this case during normal ops.
+			return *this + rhs;
 	}
 }
 
