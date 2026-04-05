@@ -26,6 +26,8 @@ namespace asmmath
 		int16_t _asm_scalar_sub_16(int16_t a, int16_t b);
 		int32_t _asm_scalar_sub_32(int32_t a, int32_t b);
 		int64_t _asm_scalar_sub_64(int64_t a, int64_t b);
+		float _asm_scalar_sub_f32(float a, float b);
+		double _asm_scalar_sub_f64(double a, double b);
 	}
 
 	template <typename T>
@@ -64,7 +66,11 @@ namespace asmmath
 	constexpr auto Scalar<T>::operator-(Scalar<U> rhs) const noexcept -> std::common_type_t<T, U>
 	{
 		using R = std::common_type_t<T, U>;
-		if constexpr (sizeof(R) == 1)
+		if constexpr (std::is_same_v<R, double>)
+			return _asm_scalar_sub_f64(static_cast<R>(*this), static_cast<R>(rhs));
+		else if constexpr (std::is_floating_point_v<T>)
+			return _asm_scalar_sub_f32(static_cast<R>(*this), static_cast<R>(rhs));
+		else if constexpr (sizeof(R) == 1)
 			return static_cast<R>(_asm_scalar_sub_8(static_cast<int8_t>(*this), static_cast<int8_t>(rhs)));
 		else if constexpr (sizeof(R) == 2)
 			return static_cast<R>(_asm_scalar_sub_16(static_cast<int16_t>(*this), static_cast<int16_t>(rhs)));

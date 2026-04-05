@@ -12,10 +12,10 @@ GENERATE_OP_PROC_INT MACRO func_name, instr_name, arg1_reg, arg2_reg, ret_reg   
 ENDM
 
 
-GENERATE_ADD_PROC_FLOAT MACRO func_name, add_instr
+GENERATE_OP_PROC_FLOAT MACRO func_name, instr_name
     public func_name
     func_name PROC
-        add_instr XMM0, XMM1
+        instr_name XMM0, XMM1
         RET
     func_name ENDP
 ENDM
@@ -35,13 +35,15 @@ GENERATE_OP_PROC_INT _asm_scalar_add_8, ADD, CL, DL, AL                         
 GENERATE_OP_PROC_INT _asm_scalar_add_16, ADD, CX, DX, AX                                            ; Addition macro invocation for 16-bit integrals.
 GENERATE_OP_PROC_INT _asm_scalar_add_32, ADD, ECX, EDX, EAX                                         ; Addition macro invocation for 32-bit integrals.
 GENERATE_OP_PROC_INT _asm_scalar_add_64, ADD, RCX, RDX, RAX                                         ; Addition macro invocation for 64-bit integrals.
-GENERATE_ADD_PROC_FLOAT _asm_scalar_add_f32, ADDSS                                                  ; Addition macro invocation for 32-bit floating point type.
-GENERATE_ADD_PROC_FLOAT _asm_scalar_add_f64, ADDSD                                                  ; Addition macro invocation for 64-bit floating point type.
+GENERATE_OP_PROC_FLOAT _asm_scalar_add_f32, ADDSS                                                   ; Addition macro invocation for 32-bit floating point type.
+GENERATE_OP_PROC_FLOAT _asm_scalar_add_f64, ADDSD                                                   ; Addition macro invocation for 64-bit floating point type.
 
 
 GENERATE_OP_PROC_INT _asm_scalar_sub_8, SUB, CL, DL, AL                                             ; Subtraction macro invocation for 8-bit integrals.
 GENERATE_OP_PROC_INT _asm_scalar_sub_16, SUB, CX, DX, AX                                            ; Subtraction macro invocation for 16-bit integrals.
 GENERATE_OP_PROC_INT _asm_scalar_sub_32, SUB, ECX, EDX, EAX                                         ; Subtraction macro invocation for 32-bit integrals.
 GENERATE_OP_PROC_INT _asm_scalar_sub_64, SUB, RCX, RDX, RAX                                         ; Subtraction macro invocation for 64-bit integrals.
+GENERATE_OP_PROC_FLOAT _asm_scalar_sub_f32, SUBSS                                                   ; Subtraction macro invocation for 32-bit floating point type.
+GENERATE_OP_PROC_FLOAT _asm_scalar_sub_f64, SUBSD                                                   ; Subtraction macro invocation for 64-bit floating point type.
 
 END
