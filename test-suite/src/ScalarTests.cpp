@@ -57,6 +57,27 @@ protected:
 TYPED_TEST_SUITE(ScalarSubtraction, SupportedTypes);
 
 
+/**
+ * @brief Test fixture for @ref asmmath::Scalar multiplication, parameterized by @ref SupportedTypes.
+ */
+template <typename T>
+class ScalarMultiplication : public ::testing::Test
+{
+protected:
+	asmmath::Scalar<T> _lhs;
+	asmmath::Scalar<T> _rhs;
+	asmmath::Scalar<T> _expectedProduct;
+
+	void SetUp() override
+	{
+		_lhs = T(3);
+		_rhs = T(13);
+		_expectedProduct = T(39);
+	}
+};
+TYPED_TEST_SUITE(ScalarMultiplication, SupportedIntegralTypes); // TODO: Change to SupportedTypes
+
+
 
 /** @test Verify that scalars can be initialized with different numeric types. */
 TYPED_TEST(ScalarCoreTests, InitializesToCorrectValue)
@@ -144,4 +165,41 @@ TYPED_TEST(ScalarSubtraction, ReturnsPromotedType)
 
 	static_assert(std::is_same_v<decltype(difference), const double>);
 	EXPECT_DOUBLE_EQ(static_cast<double>(this->_expectedDifference), difference);
+}
+
+
+/**
+ * @test Verify that multiplying two scalars return their product.
+ */
+TYPED_TEST(ScalarMultiplication, ReturnsProductOfTwoNumbers)
+{
+	const TypeParam product = this->_lhs * this->_rhs;
+
+	if constexpr (std::is_same_v<TypeParam, double>)
+		EXPECT_DOUBLE_EQ(this->_expectedProduct, product);
+	else if constexpr (std::is_floating_point_v<TypeParam>)
+		EXPECT_FLOAT_EQ(this->_expectedProduct, product);
+	else
+		EXPECT_EQ(this->_expectedProduct, product);
+}
+
+
+/**
+ * @test Verify that multiplying two scalars of different types return promoted type.
+ */
+TYPED_TEST(ScalarMultiplication, ReturnsPromotedType)
+{
+	const auto product = this->_lhs * static_cast<double>(this->_rhs);
+
+	static_assert(std::is_same_v<decltype(product), const double>);
+	EXPECT_DOUBLE_EQ(static_cast<double>(this->_expectedProduct), product);
+}
+
+/** @test Verify that multiplying by a negative scalar flips the sign of the result. */
+TEST(ScalarMultiplication, TimesNegativeScalarFlipsSign)
+{
+	constexpr asmmath::Scalar scalarA = 5;
+	constexpr asmmath::Scalar scalarB = -1;
+
+	EXPECT_EQ(-5, scalarA * scalarB);
 }

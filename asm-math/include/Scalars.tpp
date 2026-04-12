@@ -28,6 +28,11 @@ namespace asmmath
 		int64_t _asm_scalar_sub_64(int64_t a, int64_t b);
 		float _asm_scalar_sub_f32(float a, float b);
 		double _asm_scalar_sub_f64(double a, double b);
+
+		int8_t _asm_scalar_mul_8(int8_t a, int8_t b);
+		int16_t _asm_scalar_mul_16(int16_t a, int16_t b);
+		int32_t _asm_scalar_mul_32(int32_t a, int32_t b);
+		int64_t _asm_scalar_mul_64(int64_t a, int64_t b);
 	}
 
 	template <typename T>
@@ -80,6 +85,29 @@ namespace asmmath
 			return static_cast<R>(_asm_scalar_sub_64(static_cast<int64_t>(*this), static_cast<int64_t>(rhs)));
 		else // Fallback, shouldn't hit this case during normal ops.
 			return *this + rhs;
+	}
+
+
+	template <typename T>
+	template <typename U>
+	constexpr auto Scalar<T>::operator*(Scalar<U> rhs) const noexcept -> std::common_type_t<T, U>
+	{
+		using R = std::common_type_t<T, U>;
+		return *this;
+		//if constexpr (std::is_same_v<R, double>)
+		//	return 0.0;
+		//else if constexpr (std::is_floating_point_v<R>)
+		//	return 0.0f;
+		//else if constexpr (sizeof(R) == 1)
+		//	return static_cast<R>(_asm_scalar_mul_8(static_cast<int8_t>(*this), static_cast<int8_t>(rhs)));
+		//else if constexpr (sizeof(R) == 2)
+		//	return static_cast<R>(_asm_scalar_mul_8(static_cast<int16_t>(*this), static_cast<int16_t>(rhs)));
+		//else if constexpr (sizeof(R) == 4)
+		//	return static_cast<R>(_asm_scalar_mul_8(static_cast<int32_t>(*this), static_cast<int32_t>(rhs)));
+		//else if constexpr (sizeof(R) == 8)
+		//	return static_cast<R>(_asm_scalar_mul_8(static_cast<int64_t>(*this), static_cast<int64_t>(rhs)));
+		//else // Fallback, shouldn't hit this case during normal ops.
+		//	return (*this) * rhs;
 	}
 }
 
