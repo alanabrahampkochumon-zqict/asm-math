@@ -33,6 +33,8 @@ namespace asmmath
 		int16_t _asm_scalar_mul_16(int16_t a, int16_t b);
 		int32_t _asm_scalar_mul_32(int32_t a, int32_t b);
 		int64_t _asm_scalar_mul_64(int64_t a, int64_t b);
+		float _asm_scalar_mul_f32(float a, float b);
+		double _asm_scalar_mul_f64(double a, double b);
 	}
 
 	template <typename T>
@@ -94,9 +96,9 @@ namespace asmmath
 	{
 		using R = std::common_type_t<T, U>;
 		if constexpr (std::is_same_v<R, double>)
-			return 0.0;
+			return static_cast<R>(_asm_scalar_mul_f32(static_cast<R>(*this), static_cast<R>(rhs)));
 		else if constexpr (std::is_floating_point_v<R>)
-			return 0.0f;
+			return static_cast<R>(_asm_scalar_mul_f64(static_cast<R>(*this), static_cast<R>(rhs)));
 		else if constexpr (sizeof(R) == 1)
 			// Since IMUL 2 operand variant doesn't support 1byte integral we are temporarily promoting the type, performing the operation and demoting the result.
 			return static_cast<R>(_asm_scalar_mul_16(static_cast<int16_t>(*this), static_cast<int16_t>(rhs))); 

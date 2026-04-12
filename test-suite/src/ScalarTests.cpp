@@ -75,7 +75,7 @@ protected:
 		_expectedProduct = T(39);
 	}
 };
-TYPED_TEST_SUITE(ScalarMultiplication, SupportedIntegralTypes); // TODO: Change to SupportedTypes
+TYPED_TEST_SUITE(ScalarMultiplication, SupportedTypes);
 
 
 
