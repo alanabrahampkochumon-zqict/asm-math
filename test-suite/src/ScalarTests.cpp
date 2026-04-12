@@ -78,6 +78,28 @@ protected:
 TYPED_TEST_SUITE(ScalarMultiplication, SupportedTypes);
 
 
+/**
+ * @brief Test fixture for @ref asmmath::Scalar division, parameterized by @ref SupportedTypes.
+ */
+template <typename T>
+class ScalarDivision : public ::testing::Test
+{
+protected:
+	asmmath::Scalar<T> _lhs;
+	asmmath::Scalar<T> _rhs;
+	asmmath::Scalar<T> _expectedQuotient;
+
+	void SetUp() override
+	{
+		_lhs = T(12);
+		_rhs = T(4);
+		_expectedQuotient = T(3);
+	}
+};
+TYPED_TEST_SUITE(ScalarDivision, SupportedTypes);
+
+
+
 
 /** @test Verify that scalars can be initialized with different numeric types. */
 TYPED_TEST(ScalarCoreTests, InitializesToCorrectValue)
@@ -202,4 +224,42 @@ TEST(ScalarMultiplication, TimesNegativeScalarFlipsSign)
 	constexpr asmmath::Scalar scalarB = -1;
 
 	EXPECT_EQ(-5, scalarA * scalarB);
+}
+
+
+/**
+ * @test Verify that dividing two scalars return their quotient.
+ */
+TYPED_TEST(ScalarDivision, ReturnsProductOfTwoNumbers)
+{
+	const TypeParam product = this->_lhs / this->_rhs;
+
+	if constexpr (std::is_same_v<TypeParam, double>)
+		EXPECT_DOUBLE_EQ(this->_expectedQuotient, product);
+	else if constexpr (std::is_floating_point_v<TypeParam>)
+		EXPECT_FLOAT_EQ(this->_expectedQuotient, product);
+	else
+		EXPECT_EQ(this->_expectedQuotient, product);
+}
+
+
+/**
+ * @test Verify that dividing two scalars of different types return promoted type.
+ */
+TYPED_TEST(ScalarDivision, ReturnsPromotedType)
+{
+	const auto product = this->_lhs / static_cast<double>(this->_rhs);
+
+	static_assert(std::is_same_v<decltype(product), const double>);
+	EXPECT_DOUBLE_EQ(static_cast<double>(this->_expectedQuotient), product);
+}
+
+
+/** @test Verify that dividing by a negative scalar flips the sign of the result. */
+TEST(ScalarDivision, TimesNegativeScalarFlipsSign)
+{
+	constexpr asmmath::Scalar scalarA = 5;
+	constexpr asmmath::Scalar scalarB = -1;
+
+	EXPECT_EQ(-5, scalarA / scalarB);
 }

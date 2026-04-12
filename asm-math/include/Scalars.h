@@ -80,6 +80,21 @@ namespace asmmath
 		template <typename U>
 		constexpr auto operator*(Scalar<U> rhs) const noexcept -> std::common_type_t<T, U>;
 
+
+		/**
+		 * @brief Divide a scalar by another.
+		 *
+		 * @note The type is promoted to the wider numeric type using `std::common_type_t<T, U>`.
+		 *
+		 * @tparam U The numeric type of RHS operand.
+		 *
+		 * @param rhs The scalar to divide by.
+		 *
+		 * @return The quotient from the division.
+		 */
+		template <typename U>
+		constexpr auto operator/(Scalar<U> rhs) const noexcept -> std::common_type_t<T, U>;
+
 	private:
 		T _value; ///< Internal data store of the value.
 	};

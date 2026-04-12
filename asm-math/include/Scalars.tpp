@@ -111,5 +111,13 @@ namespace asmmath
 		else // Fallback, shouldn't hit this case during normal ops.
 			return (*this) * rhs;
 	}
+
+
+	template <typename T>
+	template <typename U>
+	constexpr auto Scalar<T>::operator/(Scalar<U> rhs) const noexcept -> std::common_type_t<T, U>
+	{
+		return *this;
+	}
 }
 
