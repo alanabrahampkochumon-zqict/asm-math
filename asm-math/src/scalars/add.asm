@@ -2,7 +2,7 @@
 ;=========================================================
 ;                        MACROS
 ;=========================================================
-GENERATE_OP_PROC_INT MACRO func_name, instr_name, arg1_reg, arg2_reg, ret_reg                                   ; Macro definition for integral addition.
+GENERATE_OP_PROC_INT MACRO func_name, instr_name, arg1_reg, arg2_reg, ret_reg                        ; Macro definition for integral addition.
     PUBLIC func_name
     func_name PROC
         instr_name arg1_reg, arg2_reg
