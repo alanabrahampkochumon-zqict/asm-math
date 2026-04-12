@@ -46,4 +46,9 @@ GENERATE_OP_PROC_INT _asm_scalar_sub_64, SUB, RCX, RDX, RAX                     
 GENERATE_OP_PROC_FLOAT _asm_scalar_sub_f32, SUBSS                                                   ; Subtraction macro invocation for 32-bit floating point type.
 GENERATE_OP_PROC_FLOAT _asm_scalar_sub_f64, SUBSD                                                   ; Subtraction macro invocation for 64-bit floating point type.
 
+
+GENERATE_OP_PROC_INT _asm_scalar_mul_16, IMUL, CX, DX, AX                                           ; Multiplication macro invocation for 16-bit integrals.
+GENERATE_OP_PROC_INT _asm_scalar_mul_32, IMUL, ECX, EDX, EAX                                        ; Multiplication macro invocation for 32-bit integrals.
+GENERATE_OP_PROC_INT _asm_scalar_mul_64, IMUL, RCX, RDX, RAX                                        ; Multiplication macro invocation for 64-bit integrals.
+
 END
