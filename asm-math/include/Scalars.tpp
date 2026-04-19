@@ -122,8 +122,6 @@ namespace asmmath
 	constexpr auto Scalar<T>::operator/(Scalar<U> rhs) const noexcept -> std::common_type_t<T, U>
 	{
 		using R = std::common_type_t<T, U>;
-
-		if (std::is_signed_v<>)
 		return *this;
 	}
 }

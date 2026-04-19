@@ -5,7 +5,7 @@
  * @date Created on: March 29, 2026
  *
  * @brief Scalar math operation between two or more operands.
- * 
+ *
  * @note To promote safety, the library forbids mixing of signed and unsigned operands, unless any of the operands is a floating point type, in which case, the type is promoted to the floating point equivalent.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
@@ -13,7 +13,7 @@
 
 namespace asmmath
 {
-	
+
 	template <typename T>
 	struct Scalar
 	{
@@ -28,7 +28,7 @@ namespace asmmath
 
 		/**
 		 * @brief Instantiate a @ref Scalar with a passed-in parameter.
-		 * 
+		 *
 		 * @param value The value to initialize the scalar with.
 		 */
 		constexpr Scalar(T value) noexcept;
@@ -36,19 +36,19 @@ namespace asmmath
 
 		/**
 		 * @brief Treat a @ref Scalar instance as the fundamental `value_type` primitive.
-		 *		  
-		 * @return The current value held by the current instance. 
+		 *
+		 * @return The current value held by the current instance.
 		 */
 		constexpr operator T() const noexcept;
 
 
 		/**
 		 * @brief Perform addition of two scalars.
-		 * 
+		 *
 		 * @tparam U The numeric type of RHS operand.
-		 * 
+		 *
 		 * @param rhs The scalar to add.
-		 * 
+		 *
 		 * @return The sum of two scalars.
 		 */
 		template <typename U>
@@ -70,7 +70,7 @@ namespace asmmath
 
 		/**
 		 * @brief Perform multiplication between two scalars.
-		 * 
+		 *
 		 * @note The type is promoted to the wider numeric type using `std::common_type_t<T, U>`.
 		 *
 		 * @tparam U The numeric type of RHS operand.
