@@ -11,7 +11,7 @@ set (ScalarASMDir src/scalars/)
 set(ScalarASMFiles "add.asm;")
 list(TRANSFORM ScalarASMFiles PREPEND ${ScalarASMDir})
 
-target_compile_options(ASMMathLib INTERFACE cxx_std_20)
+target_compile_features(ASMMathLib INTERFACE cxx_std_20)
 set_target_properties(ASMMathLib PROPERTIES INTERFACE_CXX_STANDARD_REQUIRED ON)
 
 target_sources(

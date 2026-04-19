@@ -36,8 +36,9 @@ namespace asmmath
         float _asm_scalar_mul_f32(float a, float b);
         double _asm_scalar_mul_f64(double a, double b);
 
-        int8_t _asm_scalar_div_8(int8_t a, int8_t b);
+        //int8_t _asm_scalar_div_8(int8_t a, int8_t b);
     }
+
 
     template <typename T>
     constexpr Scalar<T>::Scalar(const T value) noexcept: _value(value)
@@ -48,6 +49,14 @@ namespace asmmath
     {
         return _value;
     }
+
+
+    template <typename T>
+    constexpr Scalar<T>::operator T() noexcept
+    {
+        return _value;
+    }
+
 
     template <typename T>
     template <typename U>

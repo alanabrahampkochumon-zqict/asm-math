@@ -37,11 +37,20 @@ namespace asmmath
 
         /**
          * @brief Treat a @ref Scalar instance as the fundamental `value_type`
-         *        primitive.
+         *        primitive read operation.
          *
          * @return The current value held by the current instance.
          */
         constexpr operator T() const noexcept;
+
+
+        /**
+         * @brief Treat a @ref Scalar instance as the fundamental `value_type`
+         *        primitive for read-write operations.
+         *
+         * @return The current value held by the current instance.
+         */
+        constexpr operator T() noexcept;
 
 
         /**

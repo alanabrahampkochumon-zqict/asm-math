@@ -20,7 +20,7 @@ TYPED_TEST_SUITE(ScalarCoreTests, SupportedTypes);
 
 
 /**
- * @brief Test fixture for @ref asmmath::Scalar addition, parameterized by 
+ * @brief Test fixture for @ref asmmath::Scalar addition, parameterized by
  *        @ref SupportedTypes.
  */
 template <typename T>
@@ -107,6 +107,27 @@ protected:
 TYPED_TEST_SUITE(ScalarDivision, SupportedTypes);
 
 
+/**************************************
+ *                                    *
+ *            STATIC TESTS            *
+ *                                    *
+ **************************************/
+
+namespace
+{
+
+    using namespace asmmath;
+    /**
+     * @test Verify that adding a floating-point scalar to an integral scalar
+     *       promotes type.
+     */
+    namespace
+    {
+        //Scalar(5.4) + Scalar(3)
+    }
+} // namespace
+
+
 
 /**************************************
  *                                    *
@@ -114,14 +135,14 @@ TYPED_TEST_SUITE(ScalarDivision, SupportedTypes);
  *                                    *
  **************************************/
 
-/** 
+/**
  * @test Verify that scalars can be initialized with different numeric types.
  */
 TYPED_TEST(ScalarCoreTests, InitializesToCorrectValue)
 {
     constexpr TypeParam initialValue = static_cast<TypeParam>(123.567891234);
 
-    constexpr asmmath::Scalar<TypeParam> actual = TypeParam(initialValue);
+    constexpr Scalar<TypeParam> actual = TypeParam(initialValue);
 
     if constexpr (std::is_same_v<TypeParam, double>)
         EXPECT_DOUBLE_EQ(initialValue, actual);
@@ -137,7 +158,7 @@ TYPED_TEST(ScalarCoreTests, ImplicitConversionToPrimitives)
 {
     constexpr TypeParam initialValue = 123;
 
-    constexpr asmmath::Scalar<TypeParam> s(initialValue);
+    constexpr Scalar<TypeParam> s(initialValue);
 
     constexpr TypeParam primitive = s;
 
@@ -172,6 +193,7 @@ TYPED_TEST(ScalarAddition, ReturnsSumOfTwoNumbers)
         EXPECT_EQ(this->_expectedSum, sum);
 }
 
+
 /**
  * @test Verify that adding two scalars of different types return promoted type.
  */
@@ -182,7 +204,6 @@ TYPED_TEST(ScalarAddition, ReturnsPromotedType)
     static_assert(std::is_same_v<decltype(sum), const double>);
     EXPECT_DOUBLE_EQ(static_cast<double>(this->_expectedSum), sum);
 }
-
 
 
 /**************************************
@@ -208,7 +229,7 @@ TYPED_TEST(ScalarSubtraction, ReturnsDifferenceOfTwoNumbers)
 
 
 /**
- * @test Verify that subtracting two scalars of different types 
+ * @test Verify that subtracting two scalars of different types
  *       return promoted type.
  */
 TYPED_TEST(ScalarSubtraction, ReturnsPromotedType)
@@ -255,8 +276,8 @@ TYPED_TEST(ScalarMultiplication, ReturnsPromotedType)
 }
 
 
-/** 
- * @test Verify that multiplying by a negative scalar flips 
+/**
+ * @test Verify that multiplying by a negative scalar flips
  *       the sign of the result.
  */
 TEST(ScalarMultiplication, TimesNegativeScalarFlipsSign)
@@ -291,7 +312,7 @@ TYPED_TEST(ScalarDivision, ReturnsProductOfTwoNumbers)
 
 
 /**
- * @test Verify that dividing two scalars of different types 
+ * @test Verify that dividing two scalars of different types
  *       return promoted type.
  */
 TYPED_TEST(ScalarDivision, ReturnsPromotedType)
@@ -303,8 +324,8 @@ TYPED_TEST(ScalarDivision, ReturnsPromotedType)
 }
 
 
-/** 
- * @test Verify that dividing by a negative scalar flips the 
+/**
+ * @test Verify that dividing by a negative scalar flips the
  *       sign of the result.
  */
 TEST(ScalarDivision, TimesNegativeScalarFlipsSign)
