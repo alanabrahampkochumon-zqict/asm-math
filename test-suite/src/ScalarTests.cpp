@@ -11,16 +11,17 @@
 
 /**
  * @brief Test fixture for @ref asmmath::Scalar initialization and implicit
- * conversion to primitive, parameterized by @ref SupportedTypes.
+ *        conversion to primitive, parameterized by @ref SupportedTypes.
  */
 template <typename T>
 class ScalarCoreTests: public ::testing::Test
 {};
 TYPED_TEST_SUITE(ScalarCoreTests, SupportedTypes);
 
+
 /**
- * @brief Test fixture for @ref asmmath::Scalar addition, parameterized by @ref
- * SupportedTypes.
+ * @brief Test fixture for @ref asmmath::Scalar addition, parameterized by 
+ *        @ref SupportedTypes.
  */
 template <typename T>
 class ScalarAddition: public ::testing::Test
@@ -39,9 +40,10 @@ protected:
 };
 TYPED_TEST_SUITE(ScalarAddition, SupportedTypes);
 
+
 /**
  * @brief Test fixture for @ref asmmath::Scalar subtraction, parameterized by
- * @ref SupportedTypes.
+ *        @ref SupportedTypes.
  */
 template <typename T>
 class ScalarSubtraction: public ::testing::Test
@@ -60,9 +62,10 @@ protected:
 };
 TYPED_TEST_SUITE(ScalarSubtraction, SupportedTypes);
 
+
 /**
  * @brief Test fixture for @ref asmmath::Scalar multiplication, parameterized by
- * @ref SupportedTypes.
+ *      @ref SupportedTypes.
  */
 template <typename T>
 class ScalarMultiplication: public ::testing::Test
@@ -81,9 +84,10 @@ protected:
 };
 TYPED_TEST_SUITE(ScalarMultiplication, SupportedTypes);
 
+
 /**
- * @brief Test fixture for @ref asmmath::Scalar division, parameterized by @ref
- * SupportedTypes.
+ * @brief Test fixture for @ref asmmath::Scalar division, parameterized by
+ *        @ref SupportedTypes.
  */
 template <typename T>
 class ScalarDivision: public ::testing::Test
@@ -102,13 +106,16 @@ protected:
 };
 TYPED_TEST_SUITE(ScalarDivision, SupportedTypes);
 
+
+
 /**************************************
  *                                    *
  *             CORE TESTS             *
  *                                    *
  **************************************/
 
-/** @test Verify that scalars can be initialized with different numeric types.
+/** 
+ * @test Verify that scalars can be initialized with different numeric types.
  */
 TYPED_TEST(ScalarCoreTests, InitializesToCorrectValue)
 {
@@ -123,6 +130,7 @@ TYPED_TEST(ScalarCoreTests, InitializesToCorrectValue)
     else
         EXPECT_EQ(initialValue, actual);
 }
+
 
 /** @test Verify that scalar can be used as their primitive value_type. */
 TYPED_TEST(ScalarCoreTests, ImplicitConversionToPrimitives)
@@ -140,6 +148,8 @@ TYPED_TEST(ScalarCoreTests, ImplicitConversionToPrimitives)
     else
         EXPECT_EQ(initialValue, primitive);
 }
+
+
 
 /**************************************
  *                                    *
@@ -173,6 +183,8 @@ TYPED_TEST(ScalarAddition, ReturnsPromotedType)
     EXPECT_DOUBLE_EQ(static_cast<double>(this->_expectedSum), sum);
 }
 
+
+
 /**************************************
  *                                    *
  *         SUBTRACTION TESTS          *
@@ -194,9 +206,10 @@ TYPED_TEST(ScalarSubtraction, ReturnsDifferenceOfTwoNumbers)
         EXPECT_EQ(this->_expectedDifference, difference);
 }
 
+
 /**
- * @test Verify that subtracting two scalars of different types return promoted
- * type.
+ * @test Verify that subtracting two scalars of different types 
+ *       return promoted type.
  */
 TYPED_TEST(ScalarSubtraction, ReturnsPromotedType)
 {
@@ -228,6 +241,7 @@ TYPED_TEST(ScalarMultiplication, ReturnsProductOfTwoNumbers)
         EXPECT_EQ(this->_expectedProduct, product);
 }
 
+
 /**
  * @test Verify that multiplying two scalars of different types return promoted
  * type.
@@ -240,8 +254,11 @@ TYPED_TEST(ScalarMultiplication, ReturnsPromotedType)
     EXPECT_DOUBLE_EQ(static_cast<double>(this->_expectedProduct), product);
 }
 
-/** @test Verify that multiplying by a negative scalar flips the sign of the
- * result. */
+
+/** 
+ * @test Verify that multiplying by a negative scalar flips 
+ *       the sign of the result.
+ */
 TEST(ScalarMultiplication, TimesNegativeScalarFlipsSign)
 {
     constexpr asmmath::Scalar scalarA = 5;
@@ -249,6 +266,7 @@ TEST(ScalarMultiplication, TimesNegativeScalarFlipsSign)
 
     EXPECT_EQ(-5, scalarA * scalarB);
 }
+
 
 /**************************************
  *                                    *
@@ -271,9 +289,10 @@ TYPED_TEST(ScalarDivision, ReturnsProductOfTwoNumbers)
         EXPECT_EQ(this->_expectedQuotient, product);
 }
 
+
 /**
- * @test Verify that dividing two scalars of different types return promoted
- * type.
+ * @test Verify that dividing two scalars of different types 
+ *       return promoted type.
  */
 TYPED_TEST(ScalarDivision, ReturnsPromotedType)
 {
@@ -283,8 +302,11 @@ TYPED_TEST(ScalarDivision, ReturnsPromotedType)
     EXPECT_DOUBLE_EQ(static_cast<double>(this->_expectedQuotient), product);
 }
 
-/** @test Verify that dividing by a negative scalar flips the sign of the
- * result. */
+
+/** 
+ * @test Verify that dividing by a negative scalar flips the 
+ *       sign of the result.
+ */
 TEST(ScalarDivision, TimesNegativeScalarFlipsSign)
 {
     constexpr asmmath::Scalar scalarA = 5;

@@ -7,8 +7,8 @@
  * @brief Scalar math operation between two or more operands.
  *
  * @note To promote safety, the library forbids mixing of signed and unsigned
- * operands, unless any of the operands is a floating point type, in which case,
- * the type is promoted to the floating point equivalent.
+ *       operands, unless any of the operands is a floating-point type, in which case,
+ *       the type is promoted to the floating-point equivalent.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -26,6 +26,7 @@ namespace asmmath
          */
         constexpr Scalar() noexcept = default;
 
+
         /**
          * @brief Instantiate a @ref Scalar with a passed-in parameter.
          *
@@ -33,13 +34,15 @@ namespace asmmath
          */
         constexpr Scalar(T value) noexcept;
 
+
         /**
          * @brief Treat a @ref Scalar instance as the fundamental `value_type`
-         * primitive.
+         *        primitive.
          *
          * @return The current value held by the current instance.
          */
         constexpr operator T() const noexcept;
+
 
         /**
          * @brief Perform addition of two scalars.
@@ -54,6 +57,7 @@ namespace asmmath
         constexpr auto operator+(Scalar<U> rhs) const noexcept
             -> std::common_type_t<T, U>;
 
+
         /**
          * @brief Perform subtraction between two scalars.
          *
@@ -67,11 +71,12 @@ namespace asmmath
         constexpr auto operator-(Scalar<U> rhs) const noexcept
             -> std::common_type_t<T, U>;
 
+
         /**
          * @brief Perform multiplication between two scalars.
          *
          * @note The type is promoted to the wider numeric type using
-         * `std::common_type_t<T, U>`.
+         *       `std::common_type_t<T, U>`.
          *
          * @tparam U The numeric type of RHS operand.
          *
@@ -83,11 +88,12 @@ namespace asmmath
         constexpr auto operator*(Scalar<U> rhs) const noexcept
             -> std::common_type_t<T, U>;
 
+
         /**
          * @brief Divide a scalar by another.
          *
          * @note The type is promoted to the wider numeric type using
-         * `std::common_type_t<T, U>`.
+         *       `std::common_type_t<T, U>`.
          *
          * @tparam U The numeric type of RHS operand.
          *

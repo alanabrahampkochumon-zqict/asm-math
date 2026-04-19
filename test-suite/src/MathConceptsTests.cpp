@@ -4,7 +4,7 @@
  * @date Created on: April 19, 2026
  *
  * @brief Verify the mathematical concepts defined in MathConcepts.h constraints
- * and promotes types as expected.
+ *        and promotes types as expected.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
@@ -17,8 +17,10 @@
 
 namespace
 {
-    /** @brief Verify that concepts support same signed integral and/or floating
-     * as operands. */
+    /**
+     * @brief Verify that concepts support same signed integral and/or floating
+     *        as operands.
+     */
     namespace
     {
         /**************************************
@@ -110,7 +112,7 @@ namespace
     } // namespace
 
 
-    /** 
+    /**
      * @brief Verify that the concept does not support opposite signed
      *        integral types.
      */
@@ -146,8 +148,10 @@ namespace
     } // namespace
 
 
-    /** @brief Verify that @ref asmmath::SafeType promotes integral types using
-     * `std::common_type_t`. */
+    /**
+     * @brief Verify that @ref asmmath::SafeType promotes integral types using
+     *        `std::common_type_t`.
+     */
     namespace
     {
         // Unsigned types
@@ -188,11 +192,14 @@ namespace
     } // namespace
 
 
-    /** @brief Verify that @ref asmmath::SafeType promotes the result to a
-     * floating-point type if either of the operand is a floating-point type. */
+    /**
+     * @brief Verify that @ref asmmath::SafeType promotes the result to a
+     *        floating-point type if either of the operand is a floating-point
+     *        type.
+     */
     namespace
     {
-        // 32-bit floating point types
+        // 32-bit floating-point types
         static_assert(
             std::is_same_v<asmmath::SafeType<float, uint8_t>::type, float>);
         static_assert(
@@ -211,7 +218,7 @@ namespace
             std::is_same_v<asmmath::SafeType<float, float>::type, float>);
 
 
-        // 64-bit floating point types
+        // 64-bit floating-point types
         static_assert(
             std::is_same_v<asmmath::SafeType<double, uint8_t>::type, double>);
         static_assert(
@@ -231,9 +238,12 @@ namespace
             std::is_same_v<asmmath::SafeType<double, int64_t>::type, double>);
     } // namespace
 
-    /** @brief Verify that @ref asmmath::SafeType promotes the result to a
-     * 64-bit floating point type either of the operand is larger than a 32-bit
-     * floating-point type. */
+
+    /**
+     * @brief Verify that @ref asmmath::SafeType promotes the result to a
+     *        64-bit floating-point type either of the operand is larger than a
+     *        32-bit floating-point type.
+     */
     namespace
     {
 
@@ -244,4 +254,5 @@ namespace
         static_assert(
             std::is_same_v<asmmath::SafeType<float, double>::type, double>);
     } // namespace
+
 } // namespace
