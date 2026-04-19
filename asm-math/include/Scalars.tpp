@@ -1,5 +1,4 @@
 #pragma once
-#include "Scalars.h"
 /**
  * @file Scalars.tpp
  * @author Alan Abraham P Kochumon
@@ -9,6 +8,9 @@
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
+
+
+#include <type_traits>
 
 
 namespace asmmath
@@ -35,6 +37,8 @@ namespace asmmath
 		int64_t _asm_scalar_mul_64(int64_t a, int64_t b);
 		float _asm_scalar_mul_f32(float a, float b);
 		double _asm_scalar_mul_f64(double a, double b);
+
+		int8_t _asm_scalar_div_8(int8_t a, int8_t b);
 	}
 
 	template <typename T>
@@ -117,6 +121,9 @@ namespace asmmath
 	template <typename U>
 	constexpr auto Scalar<T>::operator/(Scalar<U> rhs) const noexcept -> std::common_type_t<T, U>
 	{
+		using R = std::common_type_t<T, U>;
+
+		if (std::is_signed_v<>)
 		return *this;
 	}
 }

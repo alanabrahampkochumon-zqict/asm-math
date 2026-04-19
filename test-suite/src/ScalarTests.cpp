@@ -7,6 +7,12 @@
 
 
 
+/**************************************
+ *                                    *
+ *            TEST SETUP              *
+ *                                    *
+ **************************************/
+
 /**
  * @brief Test fixture for @ref asmmath::Scalar initialization and implicit conversion to primitive, parameterized by @ref SupportedTypes.
  */

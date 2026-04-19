@@ -4,7 +4,9 @@
  * @author Alan Abraham P Kochumon
  * @date Created on: March 29, 2026
  *
- * @brief Definitions of all scalar math functions.
+ * @brief Scalar math operation between two or more operands.
+ * 
+ * @note To promote safety, the library forbids mixing of signed and unsigned operands, unless any of the operands is a floating point type, in which case, the type is promoted to the floating point equivalent.
  *
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */

@@ -2,14 +2,14 @@ add_library(ASMMathLib STATIC)
 
 set(IncludeDirectory include/)
 
-set(HeaderFiles "Scalars.h")
+set(HeaderFiles "Scalars.h;MathConcepts.h")
 list(TRANSFORM HeaderFiles PREPEND ${IncludeDirectory})
 set(TemplateDefinitionFiles "Scalars.tpp")
 list(TRANSFORM TemplateDefinitionFiles PREPEND ${IncludeDirectory})
 
-set (ScalarASMFolder src/scalars/)
+set (ScalarASMDir src/scalars/)
 set(ScalarASMFiles "add.asm;")
-list(TRANSFORM ScalarASMFiles PREPEND ${ScalarASMFolder})
+list(TRANSFORM ScalarASMFiles PREPEND ${ScalarASMDir})
 
 target_sources(
     ASMMathLib 
