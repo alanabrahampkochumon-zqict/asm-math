@@ -2,8 +2,9 @@ cmake_minimum_required(VERSION 3.25)
 project(ASMMath LANGUAGES CXX ASM_MASM)
 
 add_library(ProjectStrictWarnings INTERFACE)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Clang Formatter
 find_program(CLANG_FORMATTER NAMES clang-format)
@@ -52,7 +53,6 @@ if(ENABLE_STRICT)
         target_compile_options(ProjectStrictWarnings INTERFACE $<$<COMPILE_LANGUAGE:CXX>:-fno-omit-frame-pointer -Wall -Wextra -Werror -pedantic-errors>)
     endif()
 endif()
-
 
 include(dependencies.cmake)
 
