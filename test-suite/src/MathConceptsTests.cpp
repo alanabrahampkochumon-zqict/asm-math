@@ -55,7 +55,7 @@ namespace
 		 *                                    *
 		 **************************************/
 
-		// Same types
+		 // Same types
 		static_assert(asmmath::SafeArithmetic<uint8_t, uint8_t> == true);
 		static_assert(asmmath::SafeArithmetic<uint16_t, uint16_t> == true);
 		static_assert(asmmath::SafeArithmetic<uint32_t, uint32_t> == true);
@@ -86,7 +86,7 @@ namespace
 		 *                                    *
 		 **************************************/
 
-		// Floating point types
+		 // Floating point types
 		static_assert(asmmath::SafeArithmetic<float, float> == true);
 		static_assert(asmmath::SafeArithmetic<double, double> == true);
 		static_assert(asmmath::SafeArithmetic<float, double> == true);
@@ -108,7 +108,7 @@ namespace
 
 
 	/** @brief Verify that the concept does not support opposite signed integral. */
-	namespace 
+	namespace
 	{
 
 		/**************************************
@@ -139,4 +139,59 @@ namespace
 		static_assert(asmmath::SafeArithmetic<int64_t, uint32_t> == false);
 	}
 
+
+	/** @brief Verify that @ref asmmath::SafeType promotes integral types using `std::common_type_t`. */
+	namespace
+	{
+		// Unsigned types
+		static_assert(std::is_same_v<asmmath::SafeType<uint8_t, uint16_t>::type, int32_t>);
+		static_assert(std::is_same_v<asmmath::SafeType<uint8_t, uint32_t>::type, uint32_t>);
+		static_assert(std::is_same_v<asmmath::SafeType<uint8_t, uint64_t>::type, uint64_t>);
+		static_assert(std::is_same_v<asmmath::SafeType<uint8_t, uint64_t>::type, uint64_t>);
+
+		static_assert(std::is_same_v<asmmath::SafeType<uint16_t, uint32_t>::type, uint32_t>);
+		static_assert(std::is_same_v<asmmath::SafeType<uint16_t, uint64_t>::type, uint64_t>);
+
+		static_assert(std::is_same_v<asmmath::SafeType<uint32_t, uint64_t>::type, uint64_t>);
+
+		// Signed types
+		static_assert(std::is_same_v<asmmath::SafeType<int8_t, int16_t>::type, int32_t>);
+		static_assert(std::is_same_v<asmmath::SafeType<int8_t, int32_t>::type, int32_t>);
+		static_assert(std::is_same_v<asmmath::SafeType<int8_t, int64_t>::type, int64_t>);
+		static_assert(std::is_same_v<asmmath::SafeType<int8_t, int64_t>::type, int64_t>);
+
+		static_assert(std::is_same_v<asmmath::SafeType<int16_t, int32_t>::type, int32_t>);
+		static_assert(std::is_same_v<asmmath::SafeType<int16_t, int64_t>::type, int64_t>);
+
+		static_assert(std::is_same_v<asmmath::SafeType<int32_t, int64_t>::type, int64_t>);
+	}
+
+
+	/** @brief Verify that @ref asmmath::SafeType promotes floating-point types using `std::common_type_t` if either of the type is smaller than a 32-bit floating else it is promoted to a double. */
+	namespace
+	{
+		// 32-bit floating point types
+		static_assert(std::is_same_v<asmmath::SafeType<float, uint8_t>::type, float>);
+		static_assert(std::is_same_v<asmmath::SafeType<float, uint16_t>::type, float>);
+		static_assert(std::is_same_v<asmmath::SafeType<float, uint32_t>::type, float>);
+		static_assert(std::is_same_v<asmmath::SafeType<float, uint64_t>::type, double>);
+
+		static_assert(std::is_same_v<asmmath::SafeType<float, int8_t>::type, float>);
+		static_assert(std::is_same_v<asmmath::SafeType<float, int16_t>::type, float>);
+		static_assert(std::is_same_v<asmmath::SafeType<float, int32_t>::type, float>);
+		static_assert(std::is_same_v<asmmath::SafeType<float, int64_t>::type, double>);
+
+
+		// 64-bit floating point types
+		static_assert(std::is_same_v<asmmath::SafeType<double, uint8_t>::type, double>);
+		static_assert(std::is_same_v<asmmath::SafeType<double, uint16_t>::type, double>);
+		static_assert(std::is_same_v<asmmath::SafeType<double, uint32_t>::type, double>);
+		static_assert(std::is_same_v<asmmath::SafeType<double, uint64_t>::type, double>);
+
+		static_assert(std::is_same_v<asmmath::SafeType<double, int8_t>::type, double>);
+		static_assert(std::is_same_v<asmmath::SafeType<double, int16_t>::type, double>);
+		static_assert(std::is_same_v<asmmath::SafeType<double, int32_t>::type, double>);
+		static_assert(std::is_same_v<asmmath::SafeType<double, int64_t>::type, double>);
+
+	}
 }
