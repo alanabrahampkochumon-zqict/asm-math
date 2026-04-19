@@ -100,6 +100,11 @@ TYPED_TEST_SUITE(ScalarDivision, SupportedTypes);
 
 
 
+/**************************************
+ *                                    *
+ *             CORE TESTS             *
+ *                                    *
+ **************************************/
 
 /** @test Verify that scalars can be initialized with different numeric types. */
 TYPED_TEST(ScalarCoreTests, InitializesToCorrectValue)
@@ -135,6 +140,13 @@ TYPED_TEST(ScalarCoreTests, ImplicitConversionToPrimitives)
 }
 
 
+
+/**************************************
+ *                                    *
+ *           ADDITION TESTS           *
+ *                                    *
+ **************************************/
+
 /**
  * @test Verify that adding two scalars return their sum.
  */
@@ -161,6 +173,13 @@ TYPED_TEST(ScalarAddition, ReturnsPromotedType)
 	EXPECT_DOUBLE_EQ(static_cast<double>(this->_expectedSum), sum);
 }
 
+
+
+/**************************************
+ *                                    *
+ *         SUBTRACTION TESTS          *
+ *                                    *
+ **************************************/
 
 /**
  * @test Verify that subtracting two scalars return their difference.
@@ -189,6 +208,13 @@ TYPED_TEST(ScalarSubtraction, ReturnsPromotedType)
 	EXPECT_DOUBLE_EQ(static_cast<double>(this->_expectedDifference), difference);
 }
 
+
+
+/**************************************
+ *                                    *
+ *       MULTIPLICATION TESTS         *
+ *                                    *
+ **************************************/
 
 /**
  * @test Verify that multiplying two scalars return their product.
@@ -226,6 +252,14 @@ TEST(ScalarMultiplication, TimesNegativeScalarFlipsSign)
 	EXPECT_EQ(-5, scalarA * scalarB);
 }
 
+
+
+
+/**************************************
+ *                                    *
+ *          DIVISION TESTS            *
+ *                                    *
+ **************************************/
 
 /**
  * @test Verify that dividing two scalars return their quotient.
