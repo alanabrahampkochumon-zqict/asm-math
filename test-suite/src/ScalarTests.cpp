@@ -3,6 +3,8 @@
 #include <Scalars.h>
 #include <gtest/gtest.h>
 
+
+
 /**************************************
  *                                    *
  *            TEST SETUP              *
@@ -123,7 +125,7 @@ namespace
      */
     namespace
     {
-        //Scalar(5.4) + Scalar(3)
+        //Scalar(5.4) + Scalar(3);
     }
 } // namespace
 
@@ -183,7 +185,7 @@ TYPED_TEST(ScalarCoreTests, ImplicitConversionToPrimitives)
  */
 TYPED_TEST(ScalarAddition, ReturnsSumOfTwoNumbers)
 {
-    const TypeParam sum = this->_lhs + this->_rhs;
+    const auto sum = this->_lhs + this->_rhs;
 
     if constexpr (std::is_same_v<TypeParam, double>)
         EXPECT_DOUBLE_EQ(this->_expectedSum, sum);

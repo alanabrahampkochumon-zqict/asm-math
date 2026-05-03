@@ -34,6 +34,7 @@ namespace asmmath
      *        types using `std::common_type_t`.
      */
     template <typename T, typename U>
+    //using SafeType = std::common_type_t<T, U>;
     struct SafeType
     {
         using type = std::common_type_t<T, U>;

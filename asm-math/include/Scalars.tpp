@@ -9,6 +9,8 @@
  * @copyright Copyright (c) 2026 Alan Abraham P Kochumon
  */
 
+#include "MathConcepts.h"
+
 #include <type_traits>
 
 namespace asmmath
@@ -36,7 +38,7 @@ namespace asmmath
         float _asm_scalar_mul_f32(float a, float b);
         double _asm_scalar_mul_f64(double a, double b);
 
-        //int8_t _asm_scalar_div_8(int8_t a, int8_t b);
+        // int8_t _asm_scalar_div_8(int8_t a, int8_t b);
     }
 
 
@@ -60,10 +62,10 @@ namespace asmmath
 
     template <typename T>
     template <typename U>
-    constexpr auto Scalar<T>::operator+(Scalar<U> rhs) const noexcept
-        -> std::common_type_t<T, U>
+    constexpr SafeType<T, U>::type Scalar<T>::operator+(Scalar<U> rhs) const noexcept
+        requires SafeArithmetic<T, U>
     {
-        using R = std::common_type_t<T, U>;
+        using R = SafeType<T, U>::type;
 
         if constexpr (std::is_same_v<R, double>)
             return _asm_scalar_add_f64(static_cast<R>(*this),
