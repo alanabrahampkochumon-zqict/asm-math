@@ -18,7 +18,7 @@ BraceWrapping:
     SplitEmptyRecord: false
     SplitEmptyNamespace: false
 BreakBeforeTernaryOperators: "true"
-ColumnLimit: 80
+ColumnLimit: 120
 CompactNamespaces: "false"
 ConstructorInitializerAllOnOneLineOrOnePerLine: "true"
 Cpp11BracedListStyle: "false"

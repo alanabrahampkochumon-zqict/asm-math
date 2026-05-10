@@ -18,9 +18,10 @@ namespace asmmath
     /**
      * @brief C++20 concept for safe numeric operations limiting LHS and RHS
      *        operand to be both signed integrals, or unsigned integrals, or
-     *        either of the two being a floating-point, since at least one
-     *        floating-point operand implicitly suggest the requirement of a
-     *        floating-point operation.
+     *        either of the two being a floating-point. Auto floating-point
+     *        conversion takes precedence since at least one floating-point
+     *        operand implicitly suggest the requirement of a floating-point
+     *        operation.
      */
     template <typename T, typename U>
     concept SafeArithmetic =
@@ -34,7 +35,7 @@ namespace asmmath
      *        types using `std::common_type_t`.
      */
     template <typename T, typename U>
-    //using SafeType = std::common_type_t<T, U>;
+    // using SafeType = std::common_type_t<T, U>;
     struct SafeType
     {
         using type = std::common_type_t<T, U>;

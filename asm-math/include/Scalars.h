@@ -78,8 +78,8 @@ namespace asmmath
          * @return The difference between two scalars.
          */
         template <typename U>
-        constexpr auto operator-(Scalar<U> rhs) const noexcept
-            -> std::common_type_t<T, U>;
+        constexpr SafeType<T, U>::type operator-(Scalar<U> rhs) const noexcept
+            requires SafeArithmetic<T, U>;
 
 
         /**
@@ -95,8 +95,7 @@ namespace asmmath
          * @return The product of two scalars.
          */
         template <typename U>
-        constexpr auto operator*(Scalar<U> rhs) const noexcept
-            -> std::common_type_t<T, U>;
+        constexpr auto operator*(Scalar<U> rhs) const noexcept -> std::common_type_t<T, U>;
 
 
         /**
@@ -112,8 +111,7 @@ namespace asmmath
          * @return The quotient from the division.
          */
         template <typename U>
-        constexpr auto operator/(Scalar<U> rhs) const noexcept
-            -> std::common_type_t<T, U>;
+        constexpr auto operator/(Scalar<U> rhs) const noexcept -> std::common_type_t<T, U>;
 
     private:
         T _value; ///< Internal data store of the value.
