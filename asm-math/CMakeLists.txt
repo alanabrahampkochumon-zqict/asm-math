@@ -8,11 +8,16 @@ set(TemplateDefinitionFiles "Scalars.tpp")
 list(TRANSFORM TemplateDefinitionFiles PREPEND ${IncludeDirectory})
 
 set (ScalarASMDir src/scalars/)
-set(ScalarASMFiles "add.asm;")
+set(ScalarASMFiles "add.asm;arithmetic.nasm;")
 list(TRANSFORM ScalarASMFiles PREPEND ${ScalarASMDir})
 
-target_compile_features(ASMMathLib INTERFACE cxx_std_20)
+target_compile_features(ASMMathLib PUBLIC cxx_std_20)
 set_target_properties(ASMMathLib PROPERTIES INTERFACE_CXX_STANDARD_REQUIRED ON)
+
+# TODO: Remove after migration
+set_target_properties(ASMMathLib PROPERTIES LINKER_LANGUAGE CXX)
+set_source_files_properties("${ScalarASMDir}/add.asm" PROPERTIES LANGUAGE ASM_MASM)
+set_source_files_properties("${ScalarASMDir}/arithmetic.asm" PROPERTIES LANGUAGE ASM_NASM)
 
 target_sources(
     ASMMathLib 

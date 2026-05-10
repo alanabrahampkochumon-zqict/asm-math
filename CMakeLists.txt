@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.25)
-project(ASMMath LANGUAGES CXX ASM_MASM)
+project(ASMMath LANGUAGES CXX ASM_MASM ASM_NASM)
 
 add_library(ProjectStrictWarnings INTERFACE)
 
