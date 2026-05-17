@@ -26,6 +26,10 @@ namespace asmmath
 
         int64_t _scalar_add_64(int64_t a, int64_t b);
 
+        float _scalar_add_fp32(float a, float b);
+
+        double _scalar_add_fp64(double a, double b);
+
         // DEPRECATED: Replace with NASM assembly procedures
         float _asm_scalar_add_f32(float a, float b);
 
@@ -80,9 +84,9 @@ namespace asmmath
         using R = SafeType<T, U>::type;
 
         if constexpr (std::is_same_v<R, double>)
-            return _asm_scalar_add_f64(static_cast<R>(*this), static_cast<R>(rhs));
+            return _scalar_add_fp64(static_cast<R>(*this), static_cast<R>(rhs));
         else if constexpr (std::is_floating_point_v<T>)
-            return _asm_scalar_add_f32(static_cast<R>(*this), static_cast<R>(rhs));
+            return _scalar_add_fp32(static_cast<R>(*this), static_cast<R>(rhs));
         else if constexpr (sizeof(R) == 1)
             return static_cast<R>(_scalar_add_8(static_cast<int8_t>(*this), static_cast<int8_t>(rhs)));
         else if constexpr (sizeof(R) == 2)
