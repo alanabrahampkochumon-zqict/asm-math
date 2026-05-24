@@ -42,28 +42,36 @@ namespace asmmath
 
         double _scalar_sub_fp64(double a, double b);
 
+        int8_t _scalar_mul_8(int8_t a, int8_t b);
+
+        int16_t _scalar_mul_16(int16_t a, int16_t b);
+
+        int32_t _scalar_mul_32(int32_t a, int32_t b);
+
+        int64_t _scalar_mul_64(int64_t a, int64_t b);
+
         // DEPRECATED: Replace with NASM assembly procedures
-        float _asm_scalar_add_f32(float a, float b);
-
-        double _asm_scalar_add_f64(double a, double b);
-
-        int8_t _asm_scalar_sub_8(int8_t a, int8_t b);
-
-        int16_t _asm_scalar_sub_16(int16_t a, int16_t b);
-
-        int32_t _asm_scalar_sub_32(int32_t a, int32_t b);
-
-        int64_t _asm_scalar_sub_64(int64_t a, int64_t b);
-
-        float _asm_scalar_sub_f32(float a, float b);
-
-        double _asm_scalar_sub_f64(double a, double b);
-
-        int16_t _asm_scalar_mul_16(int16_t a, int16_t b);
-
-        int32_t _asm_scalar_mul_32(int32_t a, int32_t b);
-
-        int64_t _asm_scalar_mul_64(int64_t a, int64_t b);
+        // float _asm_scalar_add_f32(float a, float b);
+        //
+        // double _asm_scalar_add_f64(double a, double b);
+        //
+        // int8_t _asm_scalar_sub_8(int8_t a, int8_t b);
+        //
+        // int16_t _asm_scalar_sub_16(int16_t a, int16_t b);
+        //
+        // int32_t _asm_scalar_sub_32(int32_t a, int32_t b);
+        //
+        // int64_t _asm_scalar_sub_64(int64_t a, int64_t b);
+        //
+        // float _asm_scalar_sub_f32(float a, float b);
+        //
+        // double _asm_scalar_sub_f64(double a, double b);
+        //
+        // int16_t _asm_scalar_mul_16(int16_t a, int16_t b);
+        //
+        // int32_t _asm_scalar_mul_32(int32_t a, int32_t b);
+        //
+        // int64_t _asm_scalar_mul_64(int64_t a, int64_t b);
 
         float _asm_scalar_mul_f32(float a, float b);
 
@@ -121,9 +129,9 @@ namespace asmmath
         using R = SafeType<T, U>::type;
 
         if constexpr (std::is_same_v<R, double>)
-            return _scalar_sub_f64(static_cast<R>(*this), static_cast<R>(rhs));
+            return _scalar_sub_fp64(static_cast<R>(*this), static_cast<R>(rhs));
         else if constexpr (std::is_floating_point_v<T>)
-            return _scalar_sub_f32(static_cast<R>(*this), static_cast<R>(rhs));
+            return _scalar_sub_fp32(static_cast<R>(*this), static_cast<R>(rhs));
         else if constexpr (sizeof(R) == 1)
             return static_cast<R>(_scalar_sub_8(static_cast<int8_t>(*this), static_cast<int8_t>(rhs)));
         else if constexpr (sizeof(R) == 2)
@@ -151,13 +159,13 @@ namespace asmmath
             // Since IMUL 2 operand variant doesn't support byte (8-bit) integrals we
             // are temporarily promoting the type, performing the operation and
             // demoting the result.
-            return static_cast<R>(_asm_scalar_mul_16(static_cast<int16_t>(*this), static_cast<int16_t>(rhs)));
+            return static_cast<R>(_scalar_mul_16(static_cast<int16_t>(*this), static_cast<int16_t>(rhs)));
         else if constexpr (sizeof(R) == 2)
-            return static_cast<R>(_asm_scalar_mul_16(static_cast<int16_t>(*this), static_cast<int16_t>(rhs)));
+            return static_cast<R>(_scalar_mul_16(static_cast<int16_t>(*this), static_cast<int16_t>(rhs)));
         else if constexpr (sizeof(R) == 4)
-            return static_cast<R>(_asm_scalar_mul_32(static_cast<int32_t>(*this), static_cast<int32_t>(rhs)));
+            return static_cast<R>(_scalar_mul_32(static_cast<int32_t>(*this), static_cast<int32_t>(rhs)));
         else if constexpr (sizeof(R) == 8)
-            return static_cast<R>(_asm_scalar_mul_64(static_cast<int64_t>(*this), static_cast<int64_t>(rhs)));
+            return static_cast<R>(_scalar_mul_64(static_cast<int64_t>(*this), static_cast<int64_t>(rhs)));
         else // Fallback, shouldn't hit this case during normal ops.
             return (*this) * rhs;
     }

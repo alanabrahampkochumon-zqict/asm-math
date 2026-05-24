@@ -59,3 +59,8 @@ GENERATE_OP_PROC_INT _scalar_sub_32,   sub, ecx, edx, eax
 GENERATE_OP_PROC_INT _scalar_sub_64,   sub, rax, rdx, rcx
 GENERATE_OP_PROC_FP  _scalar_sub_fp32, subss
 GENERATE_OP_PROC_FP  _scalar_sub_fp64, subsd
+
+; Macro expansion for multiply operations
+GENERATE_OP_PROC_INT _scalar_mul_16,   imul, cx, dx, ax
+GENERATE_OP_PROC_INT _scalar_mul_32,   imul, ecx, edx, eax
+GENERATE_OP_PROC_INT _scalar_mul_64,   imul, rcx, rdx, rax
