@@ -54,37 +54,10 @@ namespace asmmath
 
         double _scalar_mul_fp64(double a, double b);
 
-        // DEPRECATED: Replace with NASM assembly procedures
-        // float _asm_scalar_add_f32(float a, float b);
-        //
-        // double _asm_scalar_add_f64(double a, double b);
-        //
-        // int8_t _asm_scalar_sub_8(int8_t a, int8_t b);
-        //
-        // int16_t _asm_scalar_sub_16(int16_t a, int16_t b);
-        //
-        // int32_t _asm_scalar_sub_32(int32_t a, int32_t b);
-        //
-        // int64_t _asm_scalar_sub_64(int64_t a, int64_t b);
-        //
-        // float _asm_scalar_sub_f32(float a, float b);
-        //
-        // double _asm_scalar_sub_f64(double a, double b);
-        //
-        // int16_t _asm_scalar_mul_16(int16_t a, int16_t b);
-        //
-        // int32_t _asm_scalar_mul_32(int32_t a, int32_t b);
-        //
-        // int64_t _asm_scalar_mul_64(int64_t a, int64_t b);
-
-
-
         // NOLINTEND(readability-identifier-naming)
-        // int8_t _asm_scalar_div_8(int8_t a, int8_t b);
+
     }
 
-
-    int64_t _asm_scalar_sub_64(int64_t a, int64_t b);
 
 
     template <typename T>
@@ -169,7 +142,7 @@ namespace asmmath
         else if constexpr (sizeof(R) == 8)
             return static_cast<R>(_scalar_mul_64(static_cast<int64_t>(*this), static_cast<int64_t>(rhs)));
         else // Fallback, shouldn't hit this case during normal ops.
-            return (*this) * rhs;
+            return *this * rhs;
     }
 
 
@@ -178,7 +151,7 @@ namespace asmmath
     constexpr SafeType<T, U>::type Scalar<T>::operator/(Scalar<U> rhs) const noexcept
         requires SafeArithmetic<T, U>
     {
-        using R = SafeType<T, U>::type;
+        // using R = SafeType<T, U>::type;
         return *this;
     }
 } // namespace asmmath
