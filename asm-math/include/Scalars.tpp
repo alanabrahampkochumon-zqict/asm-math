@@ -50,6 +50,10 @@ namespace asmmath
 
         int64_t _scalar_mul_64(int64_t a, int64_t b);
 
+        float _scalar_mul_fp32(float a, float b);
+
+        double _scalar_mul_fp64(double a, double b);
+
         // DEPRECATED: Replace with NASM assembly procedures
         // float _asm_scalar_add_f32(float a, float b);
         //
@@ -73,9 +77,7 @@ namespace asmmath
         //
         // int64_t _asm_scalar_mul_64(int64_t a, int64_t b);
 
-        float _asm_scalar_mul_f32(float a, float b);
 
-        double _asm_scalar_mul_f64(double a, double b);
 
         // NOLINTEND(readability-identifier-naming)
         // int8_t _asm_scalar_div_8(int8_t a, int8_t b);
@@ -152,9 +154,9 @@ namespace asmmath
     {
         using R = SafeType<T, U>::type;
         if constexpr (std::is_same_v<R, double>)
-            return static_cast<R>(_asm_scalar_mul_f32(static_cast<R>(*this), static_cast<R>(rhs)));
+            return static_cast<R>(_scalar_mul_fp32(static_cast<R>(*this), static_cast<R>(rhs)));
         else if constexpr (std::is_floating_point_v<R>)
-            return static_cast<R>(_asm_scalar_mul_f64(static_cast<R>(*this), static_cast<R>(rhs)));
+            return static_cast<R>(_scalar_mul_fp64(static_cast<R>(*this), static_cast<R>(rhs)));
         else if constexpr (sizeof(R) == 1)
             // Since IMUL 2 operand variant doesn't support byte (8-bit) integrals we
             // are temporarily promoting the type, performing the operation and

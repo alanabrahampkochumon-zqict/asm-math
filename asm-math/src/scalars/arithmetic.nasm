@@ -64,3 +64,5 @@ GENERATE_OP_PROC_FP  _scalar_sub_fp64, subsd
 GENERATE_OP_PROC_INT _scalar_mul_16,   imul, cx, dx, ax
 GENERATE_OP_PROC_INT _scalar_mul_32,   imul, ecx, edx, eax
 GENERATE_OP_PROC_INT _scalar_mul_64,   imul, rcx, rdx, rax
+GENERATE_OP_PROC_FP  _scalar_mul_fp32, mulss
+GENERATE_OP_PROC_FP  _scalar_mul_fp64, mulsd
