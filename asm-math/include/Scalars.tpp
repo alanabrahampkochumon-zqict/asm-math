@@ -54,10 +54,13 @@ namespace asmmath
 
         double _scalar_mul_fp64(double a, double b);
 
+
+        float _scalar_div_fp32(float a, float b);
+
+        double _scalar_div_fp64(double a, double b);
+
         // NOLINTEND(readability-identifier-naming)
-
     }
-
 
 
     template <typename T>
@@ -151,7 +154,16 @@ namespace asmmath
     constexpr SafeType<T, U>::type Scalar<T>::operator/(Scalar<U> rhs) const noexcept
         requires SafeArithmetic<T, U>
     {
-        // using R = SafeType<T, U>::type;
+        using R = SafeType<T, U>::type;
+        // Double precision floats
+        if constexpr (std::is_same_v<R, double>)
+        {
+            return _scalar_div_fp64(static_cast<R>(*this), static_cast<R>(rhs));
+        }
+        else if constexpr (std::is_floating_point_v<R>)
+        {
+            return _scalar_div_fp32(static_cast<R>(*this), static_cast<R>(rhs));
+        }
         return *this;
     }
 } // namespace asmmath

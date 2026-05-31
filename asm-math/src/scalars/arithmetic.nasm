@@ -44,6 +44,18 @@ segment .text
 %endmacro
 
 
+; Macro definition for floating point division operation
+; Macro argument list
+;   %1 Function name
+;   %2 Instruction
+; %macro GENERATE_OP_DIV_FP 2
+;     global %1                                           ; Export the function
+;
+;     %1:                                                 ; Function definition
+;     %2 xmm0, xmm1
+; %endmacro
+
+
 ; Macro expansion for add operations
 GENERATE_OP_PROC_INT _scalar_add_8,    add,  cl,  dl,  al
 GENERATE_OP_PROC_INT _scalar_add_16,   add,  cx,  dx,  ax
@@ -66,3 +78,7 @@ GENERATE_OP_PROC_INT _scalar_mul_32,   imul, ecx, edx, eax
 GENERATE_OP_PROC_INT _scalar_mul_64,   imul, rcx, rdx, rax
 GENERATE_OP_PROC_FP  _scalar_mul_fp32, mulss
 GENERATE_OP_PROC_FP  _scalar_mul_fp64, mulsd
+
+
+GENERATE_OP_PROC_FP _scalar_div_fp32, divss
+GENERATE_OP_PROC_FP _scalar_div_fp64, divsd

@@ -300,7 +300,7 @@ TEST(ScalarMultiplication, TimesNegativeScalarFlipsSign)
 /**
  * @test Verify that dividing two scalars return their quotient.
  */
-TYPED_TEST(ScalarDivision, ReturnsProductOfTwoNumbers)
+TYPED_TEST(ScalarDivision, ReturnsQuotient)
 {
     const TypeParam product = this->_lhs / this->_rhs;
 
