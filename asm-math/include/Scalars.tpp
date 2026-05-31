@@ -55,6 +55,15 @@ namespace asmmath
         double _scalar_mul_fp64(double a, double b);
 
 
+        // Division
+        int8_t _scalar_div_8(int8_t a, int8_t b);
+
+        int16_t _scalar_div_16(int16_t a, int16_t b);
+
+        int32_t _scalar_div_32(int32_t a, int32_t b);
+
+        int64_t _scalar_div_64(int64_t a, int64_t b);
+
         float _scalar_div_fp32(float a, float b);
 
         double _scalar_div_fp64(double a, double b);
@@ -163,6 +172,17 @@ namespace asmmath
         else if constexpr (std::is_floating_point_v<R>)
         {
             return _scalar_div_fp32(static_cast<R>(*this), static_cast<R>(rhs));
+        }
+        else if constexpr (std::is_signed_v<R>)
+        {
+            if constexpr (sizeof(R) == 1)
+                return _scalar_div_8(static_cast<R>(*this), static_cast<R>(rhs));
+            // else if constexpr (sizeof(R) == 2)
+            //     return _scalar_div_16(static_cast<R>(*this), static_cast<R>(rhs));
+            // else if constexpr (sizeof(R) == 4)
+            //     return _scalar_div_32(static_cast<R>(*this), static_cast<R>(rhs));
+            // else if constexpr (sizeof(R) == 8)
+            //     return _scalar_div_64(static_cast<R>(*this), static_cast<R>(rhs));
         }
         return *this;
     }

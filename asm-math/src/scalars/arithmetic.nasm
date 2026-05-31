@@ -48,12 +48,20 @@ segment .text
 ; Macro argument list
 ;   %1 Function name
 ;   %2 Instruction
-; %macro GENERATE_OP_DIV_FP 2
-;     global %1                                           ; Export the function
-;
-;     %1:                                                 ; Function definition
-;     %2 xmm0, xmm1
-; %endmacro
+%macro GENERATE_OP_DIV_INT 2
+    global %1                                           ; Export the function
+
+    %1:                                                 ; Function definition
+    %2 xmm0, xmm1
+%endmacro
+
+global _scalar_div_8
+_scalar_div_8:
+    mov al, cl ; Move the dividend to destination (AX)
+    mov r8b, dl ; Move the divisor to GP register
+    cbw          ; Sign extend
+    idiv r8b     ; Perform the division
+    ret
 
 
 ; Macro expansion for add operations
