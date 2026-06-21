@@ -64,6 +64,14 @@ namespace asmmath
 
         int64_t _scalar_div_64(int64_t a, int64_t b);
 
+        uint8_t _scalar_div_8u(uint8_t a, uint8_t b);
+
+        uint16_t _scalar_div_16u(uint16_t a, uint16_t b);
+
+        uint32_t _scalar_div_32u(uint32_t a, uint32_t b);
+
+        uint64_t _scalar_div_64u(uint64_t a, uint64_t b);
+
         float _scalar_div_fp32(float a, float b);
 
         double _scalar_div_fp64(double a, double b);
@@ -184,6 +192,17 @@ namespace asmmath
             else if constexpr (sizeof(R) == 8)
                 return _scalar_div_64(static_cast<R>(*this), static_cast<R>(rhs));
         }
-        return *this;
+        else if constexpr (std::is_unsigned_v<R>)
+        {
+            if constexpr (sizeof(R) == 1)
+                return _scalar_div_8u(static_cast<R>(*this), static_cast<R>(rhs));
+            else if constexpr (sizeof(R) == 2)
+                return _scalar_div_16u(static_cast<R>(*this), static_cast<R>(rhs));
+            else if constexpr (sizeof(R) == 4)
+                return _scalar_div_32u(static_cast<R>(*this), static_cast<R>(rhs));
+            else if constexpr (sizeof(R) == 8)
+                return _scalar_div_64u(static_cast<R>(*this), static_cast<R>(rhs));
+        }
+        return *this; // Shouldn't hit this case
     }
 } // namespace asmmath
