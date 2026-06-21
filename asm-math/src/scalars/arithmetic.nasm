@@ -57,11 +57,37 @@ segment .text
 
 global _scalar_div_8
 _scalar_div_8:
-    mov al, cl ; Move the dividend to destination (AX)
-    mov r8b, dl ; Move the divisor to GP register
-    cbw          ; Sign extend
-    idiv r8b     ; Perform the division
+    mov al, cl                                         ; Move the dividend to destination (AL)
+    mov r8b, dl                                        ; Move the divisor to GP register
+    cbw                                                ; Sign extend (Byte to Word) DL:AL
+    idiv r8b                                           ; Perform the division
     ret
+
+global _scalar_div_16
+_scalar_div_16:
+    mov ax, cx                                        ; Move the divident to destination (AX)
+    mov r8w, dx                                       ; Move the divisior to a GP register
+    cwd                                               ; Sign extend (Word to Double Word) DX:AX
+    idiv r8w                                          ; Perform the division. Result stored in EAX
+    ret    
+
+
+global _scalar_div_32
+_scalar_div_32:
+    mov eax, ecx                                      ; Move the divident to destination (EAX)
+    mov r8d, edx                                      ; Move the divisior to a GP register
+    cdq                                               ; Sign extend (Double Word to Quad Word) EDX:EAX
+    idiv r8d                                          ; Perform the division. Result stored in EAX
+    ret
+    
+global _scalar_div_64
+_scalar_div_64:
+    mov rax, rcx                                      ; Move the divident to destination (RAX)
+    mov r8, rdx                                       ; Move the divisior to a GP register
+    cqo                                               ; Sign extend (Quad Word to Octo Word) RDX:RAX
+    idiv r8                                           ; Perform the division. Result stored in RAX
+    ret
+
 
 
 ; Macro expansion for add operations

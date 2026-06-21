@@ -177,12 +177,12 @@ namespace asmmath
         {
             if constexpr (sizeof(R) == 1)
                 return _scalar_div_8(static_cast<R>(*this), static_cast<R>(rhs));
-            // else if constexpr (sizeof(R) == 2)
-            //     return _scalar_div_16(static_cast<R>(*this), static_cast<R>(rhs));
-            // else if constexpr (sizeof(R) == 4)
-            //     return _scalar_div_32(static_cast<R>(*this), static_cast<R>(rhs));
-            // else if constexpr (sizeof(R) == 8)
-            //     return _scalar_div_64(static_cast<R>(*this), static_cast<R>(rhs));
+            else if constexpr (sizeof(R) == 2)
+                return _scalar_div_16(static_cast<R>(*this), static_cast<R>(rhs));
+            else if constexpr (sizeof(R) == 4)
+                return _scalar_div_32(static_cast<R>(*this), static_cast<R>(rhs));
+            else if constexpr (sizeof(R) == 8)
+                return _scalar_div_64(static_cast<R>(*this), static_cast<R>(rhs));
         }
         return *this;
     }
