@@ -55,6 +55,12 @@ segment .text
     %2 xmm0, xmm1
 %endmacro
 
+
+
+;-----------------------------------------------------------
+;                   SCALAR DIVISION
+;-----------------------------------------------------------
+
 global _scalar_div_8
 _scalar_div_8:
     mov al, cl                                         ; Move the dividend to destination (AL)
@@ -66,7 +72,7 @@ _scalar_div_8:
 global _scalar_div_16
 _scalar_div_16:
     mov ax, cx                                        ; Move the dividend to destination (AX)
-    mov r8w, dx                                       ; Move the divisior to a GP register
+    mov r8w, dx                                       ; Move the divisor to a GP register
     cwd                                               ; Sign extend (Word to Double Word) DX:AX
     idiv r8w                                          ; Perform the division. Result stored in EAX
     ret    
@@ -75,7 +81,7 @@ _scalar_div_16:
 global _scalar_div_32
 _scalar_div_32:
     mov eax, ecx                                      ; Move the dividend to destination (EAX)
-    mov r8d, edx                                      ; Move the divisior to a GP register
+    mov r8d, edx                                      ; Move the divisor to a GP register
     cdq                                               ; Sign extend (Double Word to Quad Word) EDX:EAX
     idiv r8d                                          ; Perform the division. Result stored in EAX
     ret
@@ -83,14 +89,14 @@ _scalar_div_32:
 global _scalar_div_64
 _scalar_div_64:
     mov rax, rcx                                      ; Move the dividend to destination (RAX)
-    mov r8, rdx                                       ; Move the divisior to a GP register
+    mov r8, rdx                                       ; Move the divisor to a GP register
     cqo                                               ; Sign extend (Quad Word to Octo Word) RDX:RAX
     idiv r8                                           ; Perform the division. Result stored in RAX
     ret
 
 global _scalar_div_8u
 _scalar_div_8u:
-    mov al, cl                                        ; Move the divident to destination (AL)
+    mov al, cl                                        ; Move the dividend to destination (AL)
     mov r8b, dl                                       ; Move the divisor to a GP register
     xor dl, dl                                        ; Zero out the DL register
     div r8b                                           ; Perform the division
@@ -98,7 +104,7 @@ _scalar_div_8u:
     
 global _scalar_div_16u
 _scalar_div_16u:
-    mov ax, cx                                        ; Move the divident to destination (AX)
+    mov ax, cx                                        ; Move the dividend to destination (AX)
     mov r8w, dx                                       ; Move the divisor to a GP register
     xor dx, dx                                        ; Zero out the DX register
     div r8w                                           ; Perform the division
@@ -106,7 +112,7 @@ _scalar_div_16u:
 
 global _scalar_div_32u
 _scalar_div_32u:
-    mov eax, ecx                                      ; Move the divident to destination (EAX)
+    mov eax, ecx                                      ; Move the dividend to destination (EAX)
     mov r8d, edx                                      ; Move the divisor to a GP register
     xor edx, edx                                      ; Zero out the DL register
     div r8d                                           ; Perform the division
@@ -114,11 +120,16 @@ _scalar_div_32u:
     
 global _scalar_div_64u
 _scalar_div_64u:
-    mov rax, rcx                                      ; Move the divident to destination (AL)
+    mov rax, rcx                                      ; Move the dividend to destination (AL)
     mov r8, rdx                                       ; Move the divisor to a GP register
     xor rdx, rdx                                      ; Zero out the DL register
     div r8                                            ; Perform the division
     ret
+
+
+;-----------------------------------------------------------
+;                   MACRO EXPANSION
+;-----------------------------------------------------------
 
 ; Macro expansion for add operations
 GENERATE_OP_PROC_INT _scalar_add_8,    add,  cl,  dl,  al
