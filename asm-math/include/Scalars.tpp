@@ -136,7 +136,7 @@ namespace asmmath
         else if constexpr (sizeof(R) == 8)
             return static_cast<R>(_scalar_sub_64(static_cast<int64_t>(*this), static_cast<int64_t>(rhs)));
         else // Fallback, shouldn't hit this case during normal ops.
-            return *this + rhs;
+            return *this - rhs;
     }
 
 

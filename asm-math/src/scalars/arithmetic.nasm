@@ -143,7 +143,7 @@ GENERATE_OP_PROC_FP  _scalar_add_fp64, addsd
 GENERATE_OP_PROC_INT _scalar_sub_8,    sub, cl,  dl,  al
 GENERATE_OP_PROC_INT _scalar_sub_16,   sub, cx,  dx,  ax
 GENERATE_OP_PROC_INT _scalar_sub_32,   sub, ecx, edx, eax
-GENERATE_OP_PROC_INT _scalar_sub_64,   sub, rax, rdx, rcx
+GENERATE_OP_PROC_INT _scalar_sub_64,   sub, rcx, rdx, rax
 GENERATE_OP_PROC_FP  _scalar_sub_fp32, subss
 GENERATE_OP_PROC_FP  _scalar_sub_fp64, subsd
 

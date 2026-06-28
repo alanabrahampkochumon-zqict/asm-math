@@ -4,7 +4,6 @@
 #include <gtest/gtest.h>
 
 
-
 /**************************************
  *                                    *
  *            TEST SETUP              *
@@ -16,8 +15,9 @@
  *        conversion to primitive, parameterized by @ref SupportedTypes.
  */
 template <typename T>
-class ScalarCoreTests: public ::testing::Test
-{};
+class ScalarCoreTests : public ::testing::Test {};
+
+
 TYPED_TEST_SUITE(ScalarCoreTests, SupportedTypes);
 
 
@@ -26,12 +26,13 @@ TYPED_TEST_SUITE(ScalarCoreTests, SupportedTypes);
  *        @ref SupportedTypes.
  */
 template <typename T>
-class ScalarAddition: public ::testing::Test
+class ScalarAddition : public ::testing::Test
 {
 protected:
     asmmath::Scalar<T> _lhs;
     asmmath::Scalar<T> _rhs;
     asmmath::Scalar<T> _expectedSum;
+
 
     void SetUp() override
     {
@@ -40,6 +41,8 @@ protected:
         _expectedSum = T(47);
     }
 };
+
+
 TYPED_TEST_SUITE(ScalarAddition, SupportedTypes);
 
 
@@ -48,12 +51,13 @@ TYPED_TEST_SUITE(ScalarAddition, SupportedTypes);
  *        @ref SupportedTypes.
  */
 template <typename T>
-class ScalarSubtraction: public ::testing::Test
+class ScalarSubtraction : public ::testing::Test
 {
 protected:
     asmmath::Scalar<T> _lhs;
     asmmath::Scalar<T> _rhs;
     asmmath::Scalar<T> _expectedDifference;
+
 
     void SetUp() override
     {
@@ -62,6 +66,8 @@ protected:
         _expectedDifference = T(15);
     }
 };
+
+
 TYPED_TEST_SUITE(ScalarSubtraction, SupportedTypes);
 
 
@@ -70,12 +76,13 @@ TYPED_TEST_SUITE(ScalarSubtraction, SupportedTypes);
  *      @ref SupportedTypes.
  */
 template <typename T>
-class ScalarMultiplication: public ::testing::Test
+class ScalarMultiplication : public ::testing::Test
 {
 protected:
     asmmath::Scalar<T> _lhs;
     asmmath::Scalar<T> _rhs;
     asmmath::Scalar<T> _expectedProduct;
+
 
     void SetUp() override
     {
@@ -84,6 +91,8 @@ protected:
         _expectedProduct = T(39);
     }
 };
+
+
 TYPED_TEST_SUITE(ScalarMultiplication, SupportedTypes);
 
 
@@ -92,12 +101,13 @@ TYPED_TEST_SUITE(ScalarMultiplication, SupportedTypes);
  *        @ref SupportedTypes.
  */
 template <typename T>
-class ScalarDivision: public ::testing::Test
+class ScalarDivision : public ::testing::Test
 {
 protected:
     asmmath::Scalar<T> _lhs;
     asmmath::Scalar<T> _rhs;
     asmmath::Scalar<T> _expectedQuotient;
+
 
     void SetUp() override
     {
@@ -106,6 +116,8 @@ protected:
         _expectedQuotient = T(3);
     }
 };
+
+
 TYPED_TEST_SUITE(ScalarDivision, SupportedTypes);
 
 
@@ -117,7 +129,6 @@ TYPED_TEST_SUITE(ScalarDivision, SupportedTypes);
 
 namespace
 {
-
     using namespace asmmath;
     /**
      * @test Verify that adding a floating-point scalar to an integral scalar
@@ -128,7 +139,6 @@ namespace
         //Scalar(5.4) + Scalar(3);
     }
 } // namespace
-
 
 
 /**************************************
@@ -173,7 +183,6 @@ TYPED_TEST(ScalarCoreTests, ImplicitConversionToPrimitives)
 }
 
 
-
 /**************************************
  *                                    *
  *           ADDITION TESTS           *
@@ -213,14 +222,15 @@ TYPED_TEST(ScalarAddition, ReturnsPromotedType)
  *         SUBTRACTION TESTS          *
  *                                    *
  **************************************/
-
+#include <iostream>
 /**
  * @test Verify that subtracting two scalars return their difference.
  */
 TYPED_TEST(ScalarSubtraction, ReturnsDifferenceOfTwoNumbers)
 {
     const TypeParam difference = this->_lhs - this->_rhs;
-
+    std::cout << "LHS: " << this->_lhs << ", RHS: " << this->_rhs << ", Difference: " << difference << ", Expected: " <<
+        this->_expectedDifference << '\n';
     if constexpr (std::is_same_v<TypeParam, double>)
         EXPECT_DOUBLE_EQ(this->_expectedDifference, difference);
     else if constexpr (std::is_floating_point_v<TypeParam>)
@@ -242,6 +252,7 @@ TYPED_TEST(ScalarSubtraction, ReturnsPromotedType)
     EXPECT_DOUBLE_EQ(static_cast<double>(this->_expectedDifference),
                      difference);
 }
+
 
 /**************************************
  *                                    *
@@ -302,14 +313,14 @@ TEST(ScalarMultiplication, TimesNegativeScalarFlipsSign)
  */
 TYPED_TEST(ScalarDivision, ReturnsQuotient)
 {
-    const TypeParam product = this->_lhs / this->_rhs;
+    const TypeParam quotient = this->_lhs / this->_rhs;
 
     if constexpr (std::is_same_v<TypeParam, double>)
-        EXPECT_DOUBLE_EQ(this->_expectedQuotient, product);
+        EXPECT_DOUBLE_EQ(this->_expectedQuotient, quotient);
     else if constexpr (std::is_floating_point_v<TypeParam>)
-        EXPECT_FLOAT_EQ(this->_expectedQuotient, product);
+        EXPECT_FLOAT_EQ(this->_expectedQuotient, quotient);
     else
-        EXPECT_EQ(this->_expectedQuotient, product);
+        EXPECT_EQ(this->_expectedQuotient, quotient);
 }
 
 
@@ -319,10 +330,10 @@ TYPED_TEST(ScalarDivision, ReturnsQuotient)
  */
 TYPED_TEST(ScalarDivision, ReturnsPromotedType)
 {
-    const auto product = this->_lhs / static_cast<double>(this->_rhs);
+    const auto quotient = this->_lhs / static_cast<double>(this->_rhs);
 
-    static_assert(std::is_same_v<decltype(product), const double>);
-    EXPECT_DOUBLE_EQ(static_cast<double>(this->_expectedQuotient), product);
+    static_assert(std::is_same_v<decltype(quotient), const double>);
+    EXPECT_DOUBLE_EQ(static_cast<double>(this->_expectedQuotient), quotient);
 }
 
 
