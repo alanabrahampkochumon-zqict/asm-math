@@ -1,3 +1,5 @@
+[![Unit Tests](https://github.com/alanabrahampkochumon-zqict/asm-math/actions/workflows/unit-tests.yml/badge.svg)](https://github.com/alanabrahampkochumon-zqict/asm-math/actions/workflows/unit-tests.yml)
+
 # ASM Math
 
 A simple math interface written in x64 assembly, that works with CPP. See `playground` to see demo of the interface in action.
