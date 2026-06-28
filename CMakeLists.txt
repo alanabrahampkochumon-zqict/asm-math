@@ -46,6 +46,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 if(ENABLE_STRICT)
     message(STATUS "Turning on Address Sanitizer")
     if(MSVC AND NOT CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+        # TODO: Add back ASAN
 #        target_compile_options(ProjectStrictWarnings INTERFACE $<$<AND:$<COMPILE_LANGUAGE:C,CXX>,$<CONFIG:Debug>>:/fsanitize=address;/Zi>)
         target_compile_options(ProjectStrictWarnings INTERFACE $<$<COMPILE_LANGUAGE:CXX>:/WX /W4 /permissive- /fp:strict>)
     endif ()

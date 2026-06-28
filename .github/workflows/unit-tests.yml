@@ -11,7 +11,7 @@ jobs:
     runs-on: windows-latest
 
     strategy:
-      # Set fail-fast to false to ensure that feedback is delivered for all matrix combinations. Consider changing this to true when your workflow is stable.
+      # Set fail-fast to `false` to ensure that feedback is delivered for all matrix combinations. Consider changing this to true when your workflow is stable.
       fail-fast: true
 
       # Set up a matrix to run the following 10 configurations:
@@ -42,7 +42,6 @@ jobs:
           -DCMAKE_C_COMPILER=cl
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
           -D ENABLE_STRICT=ON
-          -D NONCOMPREHENSIVE=ON
           -DSDL_UNIX_CONSOLE_BUILD=ON
           -S ${{ github.workspace }}
 
