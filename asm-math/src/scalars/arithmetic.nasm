@@ -98,6 +98,7 @@ global _scalar_div_8u
 _scalar_div_8u:
     mov al, cl                                        ; Move the dividend to destination (AL)
     mov r8b, dl                                       ; Move the divisor to a GP register
+    xor ah, ah                                        ; Zero out the DL register
     xor dl, dl                                        ; Zero out the DL register
     div r8b                                           ; Perform the division
     ret
