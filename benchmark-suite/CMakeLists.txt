@@ -1,13 +1,16 @@
 add_executable(BenchmarkSuite)
 
-set(SrcDirectory "src/")
-set(SrcFiles "SampleBenchmark.cpp")
-list(TRANSFORM SrcFiles PREPEND ${SrcDirectory})
+set(SourceDir "src/")
+
+
+set(SourceFiles "SampleBenchmark.cpp")
+list(TRANSFORM SourceFiles PREPEND ${SourceDir})
+
 
 target_sources(
     BenchmarkSuite
     PRIVATE
-    ${SrcFiles}
+    ${SourceFiles}
 )
 
 target_precompile_headers(

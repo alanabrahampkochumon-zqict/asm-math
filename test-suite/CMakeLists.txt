@@ -1,12 +1,15 @@
 add_executable(TestSuite)
 
 set(TestDir "src/")
+set(IncludeDir "include/")
+
+
 set(TestFiles "ScalarTests.cpp;MathConceptsTests.cpp")
 list(TRANSFORM TestFiles PREPEND ${TestDir})
 
-set(IncludeDir "include/")
 set(IncludeFiles "Utils.h")
 list(TRANSFORM IncludeFiles PREPEND ${IncludeDir})
+
 
 target_sources(
     TestSuite
@@ -31,6 +34,6 @@ target_link_libraries(
     ASMMathLib
 )
 
-enable_testing()
+
 include(GoogleTest)
 gtest_discover_tests(TestSuite)

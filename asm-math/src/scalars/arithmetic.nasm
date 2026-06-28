@@ -57,9 +57,9 @@ segment .text
 
 
 
-;-----------------------------------------------------------
-;                   SCALAR DIVISION
-;-----------------------------------------------------------
+;------------------------------------------;
+;            SCALAR DIVISION               ;
+;------------------------------------------;
 
 global _scalar_div_8
 _scalar_div_8:
@@ -127,9 +127,9 @@ _scalar_div_64u:
     ret
 
 
-;-----------------------------------------------------------
-;                   MACRO EXPANSION
-;-----------------------------------------------------------
+;------------------------------------------;
+;            MACRO EXPANSION               ;
+;------------------------------------------;
 
 ; Macro expansion for add operations
 GENERATE_OP_PROC_INT _scalar_add_8,    add,  cl,  dl,  al
@@ -154,6 +154,6 @@ GENERATE_OP_PROC_INT _scalar_mul_64,   imul, rcx, rdx, rax
 GENERATE_OP_PROC_FP  _scalar_mul_fp32, mulss
 GENERATE_OP_PROC_FP  _scalar_mul_fp64, mulsd
 
-
+; Macro expansion for floating point division.--*
 GENERATE_OP_PROC_FP _scalar_div_fp32, divss
 GENERATE_OP_PROC_FP _scalar_div_fp64, divsd

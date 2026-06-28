@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 project(ASMMath LANGUAGES CXX ASM_NASM)
+enable_testing()
+
 
 add_library(ProjectStrictWarnings INTERFACE)
 

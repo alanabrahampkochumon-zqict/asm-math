@@ -1,13 +1,14 @@
 add_executable(Playground)
 
-set(SrcDirectory src/)
-set(SrcFiles "main.cpp")
-list(TRANSFORM SrcFiles PREPEND ${SrcDirectory})
+set(SourceDir src/)
+
+set(SourceFiles "main.cpp")
+list(TRANSFORM SourceFiles PREPEND ${SourceDir})
 
 target_sources(
     Playground
     PRIVATE
-    ${SrcFiles}
+    ${SourceFiles}
 )
 
 target_link_libraries(

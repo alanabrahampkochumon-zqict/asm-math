@@ -1,19 +1,22 @@
 add_library(ASMMathLib STATIC)
-
-set(IncludeDirectory include/)
-
-set(HeaderFiles "Scalars.h;MathConcepts.h")
-list(TRANSFORM HeaderFiles PREPEND ${IncludeDirectory})
-set(TemplateDefinitionFiles "Scalars.tpp")
-list(TRANSFORM TemplateDefinitionFiles PREPEND ${IncludeDirectory})
-
-set (ScalarASMDir src/scalars/)
-set(ScalarASMFiles "arithmetic.nasm;")
-list(TRANSFORM ScalarASMFiles PREPEND ${ScalarASMDir})
-
 target_compile_features(ASMMathLib PUBLIC cxx_std_20)
 set_target_properties(ASMMathLib PROPERTIES INTERFACE_CXX_STANDARD_REQUIRED ON)
 set_target_properties(ASMMathLib PROPERTIES LINKER_LANGUAGE CXX)
+
+
+set(IncludeDirectory include/)
+set (ScalarASMDir src/scalars/)
+
+
+set(HeaderFiles "Scalars.h;MathConcepts.h")
+list(TRANSFORM HeaderFiles PREPEND ${IncludeDirectory})
+
+set(TemplateDefinitionFiles "Scalars.tpp")
+list(TRANSFORM TemplateDefinitionFiles PREPEND ${IncludeDirectory})
+
+set(ScalarASMFiles "arithmetic.nasm;")
+list(TRANSFORM ScalarASMFiles PREPEND ${ScalarASMDir})
+
 
 target_sources(
     ASMMathLib 
