@@ -147,9 +147,9 @@ namespace asmmath
     {
         using R = SafeType<T, U>::type;
         if constexpr (std::is_same_v<R, double>)
-            return static_cast<R>(_scalar_mul_fp32(static_cast<R>(*this), static_cast<R>(rhs)));
-        else if constexpr (std::is_floating_point_v<R>)
             return static_cast<R>(_scalar_mul_fp64(static_cast<R>(*this), static_cast<R>(rhs)));
+        else if constexpr (std::is_floating_point_v<R>)
+            return static_cast<R>(_scalar_mul_fp32(static_cast<R>(*this), static_cast<R>(rhs)));
         else if constexpr (sizeof(R) == 1)
             // Since IMUL 2 operand variant doesn't support byte (8-bit) integrals we
             // are temporarily promoting the type, performing the operation and
@@ -203,6 +203,5 @@ namespace asmmath
             else if constexpr (sizeof(R) == 8)
                 return _scalar_div_64u(static_cast<R>(*this), static_cast<R>(rhs));
         }
-        return *this; // Shouldn't hit this case
     }
 } // namespace asmmath

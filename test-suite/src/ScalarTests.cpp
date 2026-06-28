@@ -332,8 +332,8 @@ TYPED_TEST(ScalarDivision, ReturnsPromotedType)
  */
 TEST(ScalarDivision, TimesNegativeScalarFlipsSign)
 {
-    constexpr asmmath::Scalar scalarA = 5;
-    constexpr asmmath::Scalar scalarB = -1;
+    constexpr Scalar scalarA = 5;
+    constexpr Scalar scalarB = -1;
 
     EXPECT_EQ(-5, scalarA / scalarB);
 }

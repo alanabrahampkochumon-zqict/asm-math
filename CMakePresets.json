@@ -23,7 +23,8 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_CXX_COMPILER": "cl",
-                "CMAKE_C_COMPILER": "cl"
+                "CMAKE_C_COMPILER": "cl",
+                "ENABLE_STRICT": true
             }
         },
         {
@@ -43,7 +44,8 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
                 "CMAKE_CXX_COMPILER": "clang-cl",
-                "CMAKE_C_COMPILER": "clang-cl"
+                "CMAKE_C_COMPILER": "clang-cl",
+                "ENABLE_STRICT": true
             }
         },
         {
