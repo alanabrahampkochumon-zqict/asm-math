@@ -38,8 +38,8 @@ jobs:
         run: >
           cmake -B ${{ steps.strings.outputs.build-output-dir }}
           -G Ninja
-          -DCMAKE_CXX_COMPILER=${cl}
-          -DCMAKE_C_COMPILER=${cl}
+          -DCMAKE_CXX_COMPILER=cl
+          -DCMAKE_C_COMPILER=cl
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
           -D ENABLE_STRICT=ON
           -D NONCOMPREHENSIVE=ON
